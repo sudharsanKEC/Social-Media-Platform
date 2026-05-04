@@ -1,0 +1,77 @@
+Whole Structure:
+social-media-platform/
+│
+├── backend/                # Spring Boot (your current focus)
+│
+├── frontend/               # React app (later)
+│
+├── infra/                  # Terraform (cloud setup)
+│
+├── devops/                 # Docker, Kubernetes, CI/CD configs
+│
+├── docs/                   # Architecture + notes
+│
+├── .github/                # GitHub Actions / PR templates
+│
+├── docker-compose.yml      # Local multi-service setup
+│
+└── README.md
+
+-------------------------------------------------------------------------------------------------------------------------------
+Backend Folder:
+
+backend/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/com/yourapp/socialmedia/
+│   │   │   ├── config/
+│   │   │   ├── controller/
+│   │   │   ├── service/
+│   │   │   ├── repository/
+│   │   │   ├── model/
+│   │   │   ├── dto/
+│   │   │   ├── exception/
+│   │   │   └── util/
+│   │   │
+│   │   └── resources/
+│   │       └── application.properties
+│
+├── Dockerfile             # later
+├── pom.xml
+└── README.md
+
+This is the current project structure follows monolith architecture.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+# Spring Boot / Java
+backend/target/
+*.log
+*.class
+
+# OS, the below is MAC OS related
+.DS_Store
+
+#IDE related settings will be in .idea and .vscode folders respectively, they can be ignored.
+.idea/
+.vscode/
+
+#Node
+node_modules/

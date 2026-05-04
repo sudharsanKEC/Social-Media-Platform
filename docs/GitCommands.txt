@@ -1,0 +1,65 @@
+1) git init
+    This command initializes git in our project. It creates a hidden .git/ folder.
+    This starts the version controlling in our project and after this project, the git will start to track our project.
+
+2) git add .
+    This command moves all the git tracking files to the Staging Area(index - the ordering of files before commiting it).
+    Think of it like this: If a Commit is a photograph of your project, Staging is the process of lining everyone up and making sure they are in the right spot before you press the shutter button.
+
+3) git commit -m "message"
+    This saves the snapshot of all the staged files along with the commit message.
+    After the commit, all the files will be newly tracked.
+
+4) git remote add origin <url>
+    This command connects our local repo to the github repo.
+    It stores the GitHub repository URL inside your local Git config and gives it the alias origin.
+    The origin is a nickname for the long link https://github.com/your-username/social-media-platform.git, so that we can use origin instead of the big link when we commit again or whenever we want to use the big link.
+    origin = nickname for the remote repo
+
+5) git branch -M main
+    This renames the current branch as main. -M refers to force rename
+    And the main remains as the current branch.
+
+6) git checkout -b develop
+    This creates a new branch develop and switches to it.
+
+7) git push -u origin develop
+    This command pushes the branch in local to github.
+    What does -u mean?  -u refers to upstream. That means, this command sets the default remote branch for this branch.
+    So whenever we next use the push command for pushing the local branch to the remote github, we don't want to use the origin alias name.
+    We can just use: git push instead of git push origin develop
+
+Flow:
+
+git init
+   ↓
+git add .
+   ↓
+git commit
+   ↓
+git remote add origin
+   ↓
+git push
+
+
+Default branches:
+    main (stable)
+    develop (active work)
+    feature/* (new features)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

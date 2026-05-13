@@ -5,7 +5,6 @@ import com.socialMedia.platform.repository.DummyRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication //(exclude = {DataSourceAutoConfiguration.class}) // prevents SpringBoot from auto configuring with the SQL db, which prevents the application from running.

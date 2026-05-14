@@ -1,5 +1,6 @@
 package com.socialMedia.platform.service;
 
+import com.socialMedia.platform.exception.*;
 import com.socialMedia.platform.model.OtpVerification;
 import com.socialMedia.platform.repository.OtpVerificationRepository;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,12 @@ public class OtpService {
 
             OtpVerification otpVerification = existingOtp.get();
 
+            if(otpVerification.isVerified()){
+                throw new EmailAlreadyVerifiedException("Entered email is already verified!");
+            }
+
             if(otpVerification.getBlockedUntil() != null && now.isBefore(otpVerification.getBlockedUntil())){
-                throw new RuntimeException("Too many Requests, please try again after a while");
+                throw new TooManyOtpRequestsException("Too many Requests, please try again after a while");
             }
 
             if(otpVerification.getBlockedUntil() != null && now.isAfter(otpVerification.getBlockedUntil())){
@@ -64,7 +69,7 @@ public class OtpService {
                         now.plusHours(1)
                 );
                 otpRepository.save(otpVerification);
-                throw new RuntimeException("OTP limit reached");
+                throw new TooManyOtpRequestsException("OTP limit reached");
             }
 
             otpVerification.setOtp(generatedOtp);
@@ -105,25 +110,25 @@ public class OtpService {
         Optional<OtpVerification> existingOtp = otpRepository.findByEmail(email);
 
         if(existingOtp.isEmpty()){
-            throw new RuntimeException("Email not found!");
+            throw new EmailNotFoundException("Email not found!");
         }
 
         OtpVerification otpVerification = existingOtp.get();
 
         if(otpVerification.isVerified()){
-            throw new RuntimeException("Email already verified");
+            throw new EmailAlreadyVerifiedException("Email already verified");
         }
 
         if(LocalDateTime.now().isAfter(otpVerification.getExpiryTime())){
-            throw new RuntimeException("OTP session expired, try generating a new OTP");
+            throw new OtpExpirationException("OTP session expired, try generating a new OTP");
         }
 
         if(!otpVerification.getOtp().equals(otp)){
-            throw new RuntimeException("Invalid OTP, please enter the correct OTP");
+            throw new InvalidOtpException("Invalid OTP, please enter the correct OTP");
         }
 
         otpVerification.setVerified(true);
         otpRepository.save(otpVerification);
-        return "OTP verification successfull!";
+        return "OTP verification successful!";
     }
 }

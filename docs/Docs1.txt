@@ -1,0 +1,9 @@
+@Bean
+CommandLineRunner runner(DummyRepository dummyRepo){
+	return args -> dummyRepo.save(new Dummy("First user"));
+}
+The above code was in PlatformApplication.java.
+CommandLineRunner is an interface in java, which has only one method in it which is run(). So its generally a functional interface.
+We can implement the CommandLinRunner class 
+
+

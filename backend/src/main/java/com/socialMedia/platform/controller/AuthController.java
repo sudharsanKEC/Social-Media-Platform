@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -21,14 +24,18 @@ public class AuthController {
     }
 
     @PostMapping("/send-otp")
-    public ResponseEntity<String> sendOtp(@Valid @RequestBody SendOtpRequest request){
+    public ResponseEntity<Map<String,String>> sendOtp(@Valid @RequestBody SendOtpRequest request){
         otpService.createOrUpdateOtp(request.getEmail());
-        return ResponseEntity.ok("OTP generated successfully");
+        Map<String,String> hm = new HashMap<>();
+        hm.put("message","OTP sent successfully");
+        return ResponseEntity.ok(hm);
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<String> verifyOtp(@Valid @RequestBody VerifyOtpRequest request){
+    public ResponseEntity<Map<String, String>> verifyOtp(@Valid @RequestBody VerifyOtpRequest request){
         String response = otpService.verifyOtp(request.getEmail(), request.getOtp());
-        return ResponseEntity.ok(response);
+        Map<String, String> hm = new HashMap<>();
+        hm.put("message",response);
+        return ResponseEntity.ok(hm);
     }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { sendOtp } from '../services/authService';
 
-function SendOtpPage() {
+export default function SendOtpPage() {
 
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -42,12 +42,12 @@ function SendOtpPage() {
             </form>
             {
                 message && <p>{message}</p>
+                
             }
 
         </div>
     )
 }
 
-export default SendOtpPage;
 
 

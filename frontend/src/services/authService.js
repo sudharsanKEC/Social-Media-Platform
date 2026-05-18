@@ -1,9 +1,6 @@
 const BASE_URL = "http://localhost:8080/api/auth";
 
 export const sendOtp = async (email) => {
-    const userEmail = {
-        email:email
-    };
     // Note: fetch() returns a promise, but await of returns the resolved value inside the promise to the variable response below.
     // If the promise was placed in rejected state then the await will throw an error, we should handle them using try-catch
     try{
@@ -17,7 +14,7 @@ export const sendOtp = async (email) => {
                     // The data can be json, XML, plain text, File data and backend parses differently.
                 },
                 // The below body contains the actual data sent to the server
-                body: JSON.stringify(userEmail), // JSON.stringify() converts normal JS object into a text, because http can only understand texts.
+                body: JSON.stringify({email:email}), // JSON.stringify() converts normal JS object into a text, because http can only understand texts.
                 /**
                     This userEmail is a JavaScript object.
                         But HTTP cannot send raw JS objects.

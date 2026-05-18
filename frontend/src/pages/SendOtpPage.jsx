@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { sendOtp } from '../services/authService';
-
+import VerifyOtp from './VerifyOtpPage';
 export default function SendOtpPage() {
 
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [otpSent, setOtpSent] = useState(false);
 
     const handleOtp = async (event) => {
         event.preventDefault();
@@ -14,9 +15,11 @@ export default function SendOtpPage() {
         setMessage("");
         try {
             const response = await sendOtp(email);
+            setOtpSent(true);
             setMessage(response.message);
         } catch (error) {
             setMessage(error.message);
+            setOtpSent(false);
         } finally {
             setLoading(false);
         }
@@ -31,7 +34,9 @@ export default function SendOtpPage() {
                     placeholder='Enter your email'
                     value={email}
                     onChange={(event) => {
-                        setEmail(event.target.value)
+                        setEmail(event.target.value);
+                        setMessage("");
+                        setOtpSent(false);
                     }}
                 />
                 <button type='submit'>
@@ -40,11 +45,8 @@ export default function SendOtpPage() {
                     }
                 </button>
             </form>
-            {
-                message && <p>{message}</p>
-                
-            }
-
+            {message && <p>{message}</p>}
+            {otpSent && <VerifyOtp email={email}/>}
         </div>
     )
 }

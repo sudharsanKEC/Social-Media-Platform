@@ -2,7 +2,9 @@ package com.socialMedia.platform.service;
 
 import com.socialMedia.platform.exception.*;
 import com.socialMedia.platform.model.OtpVerification;
+import com.socialMedia.platform.model.User;
 import com.socialMedia.platform.repository.OtpVerificationRepository;
+import com.socialMedia.platform.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,10 +15,12 @@ import java.util.Random;
 public class OtpService {
     private final OtpVerificationRepository otpRepository;
     private final EmailService emailService;
+    private final UserRepository userRepository;
     // constructor injection
-    public OtpService(OtpVerificationRepository otpRepository, EmailService emailService){
+    public OtpService(OtpVerificationRepository otpRepository, EmailService emailService, UserRepository userRepository){
         this.otpRepository = otpRepository;
         this.emailService = emailService;
+        this.userRepository = userRepository;
     }
 
     public String generateOtp(){
@@ -29,6 +33,11 @@ public class OtpService {
     }
 
     public OtpVerification createOrUpdateOtp(String email){
+
+        Optional<User> emailExists = userRepository.findByUserEmail(email);
+        if(emailExists.isPresent()){
+            throw new UserAlreadyExistsException("User with this email already exists!");
+        }
 
         String generatedOtp = generateOtp();
 

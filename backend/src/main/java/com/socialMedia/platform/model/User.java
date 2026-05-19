@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -17,19 +18,24 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    private Long user_id;
-    private String user_name;
-    private String user_email;
-    private String user_password;
-    private Long user_followersCount;
-    private Long user_friendsCount;
-    private String user_profilePhotoUrl;
-    private String user_description;
-    private String user_summary;
+    private String userId;
 
-    private LocalDateTime user_createdAt;
+    @Indexed(unique = true)
+    private String userName;
 
-    private Long user_postsCount;
+    @Indexed(unique = true)
+    private String userEmail;
+
+    private String userPassword;
+    private Long userFollowersCount;
+    private Long userFriendsCount;
+    private String userProfilePhotoUrl;
+    private String userDescription;
+    private String userSummary;
+
+    private LocalDateTime userCreatedAt;
+
+    private Long userPostsCount;
 
 
 }

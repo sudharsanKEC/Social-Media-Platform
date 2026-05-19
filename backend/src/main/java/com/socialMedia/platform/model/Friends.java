@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Friends {
 
     @Id
-    private Long friends_id;
-    private Long request_userId;
-    private Long receiver_userId;
-    private String request_status;
+    private Long friendsId;
+    private Long requestUserId;
+    private Long receiverUserId;
+    private String requestStatus;
     private Boolean isFriends;
     private Long endedByUserId;
 

@@ -70,20 +70,4 @@ Generated MongoDB Query
         ↓
 Execution
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- */
+*/

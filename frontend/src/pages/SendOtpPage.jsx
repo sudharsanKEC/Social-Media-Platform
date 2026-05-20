@@ -14,6 +14,7 @@ export default function SendOtpPage() {
         setLoading(true);
         setMessage("");
         try {
+            setOtpSent(false);
             const response = await sendOtp(email);
             setOtpSent(true);
             setMessage(response.message);

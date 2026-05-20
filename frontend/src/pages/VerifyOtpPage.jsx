@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { otpVerificationService } from "../services/otpVerificationService";
+import { Popup } from "./OtpSuccessPopup";
 export default function VerifyOtp({email}){
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");    
+    const [showPopup, setShowPopup] = useState(false);
     
     const otpVerificationResponse = async (event)=>{
         event.preventDefault();
@@ -11,6 +13,8 @@ export default function VerifyOtp({email}){
             setLoading(true);
             const response = await otpVerificationService(otp, email);
             setMessage(response.message);
+            setShowPopup(true);
+            setTimeout(()=>setShowPopup(false),8000);
         }catch(err){
             setMessage(err.message);
         }finally{
@@ -35,8 +39,9 @@ export default function VerifyOtp({email}){
                         loading ? "Verifying" : "Verify"
                     }
                 </button>
-                {message && <p>{message}</p>}
             </form>
+            {message && <p>{message}</p>}
+            {showPopup && <Popup message={message}/>}
         </div>
     );
 }

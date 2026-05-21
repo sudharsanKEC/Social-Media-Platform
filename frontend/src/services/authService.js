@@ -31,10 +31,10 @@ export const sendOtp = async (email) => {
         );
         
         const data = await response.json(); // converts response body into JS object
-
+        console.log(data.error);
         if(!response.ok){
             throw new Error(
-                data.message || "Failed to send OTP"
+                data.message || data.error.email || "Failed to send OTP"
             );
         }
         return data;

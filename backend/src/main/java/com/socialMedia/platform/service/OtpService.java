@@ -138,6 +138,6 @@ public class OtpService {
 
         otpVerification.setVerified(true);
         otpRepository.save(otpVerification);
-        return "OTP verification successful!";
+        return "Email verification done!";
     }
 }

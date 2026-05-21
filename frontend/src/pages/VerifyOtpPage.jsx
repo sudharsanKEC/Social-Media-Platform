@@ -28,20 +28,24 @@ export default function VerifyOtp({email}){
             <form onSubmit={otpVerificationResponse}>
                 <input
                     type="text"
+                    className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand block px-3 py-2 shadow-xs placeholder:text-body w-[200px] inline-block mr-5" 
                     placeholder="Enter the OTP"
                     value={otp}
                     onChange={(event)=>{
                         setOtp(event.target.value);
                     }}
+                    required
                 />
-                <button type="submit">
+                <button type="submit"
+                className = "text-heading bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-md text-sm px-4 py-2.5 text-center leading-5 cursor-pointer"
+                >
                     {
                         loading ? "Verifying" : "Verify"
                     }
                 </button>
             </form>
             {message && <p>{message}</p>}
-            {showPopup && <Popup message={message}/>}
+            {showPopup && <Popup message={message} email={email}/>}
         </div>
     );
 }

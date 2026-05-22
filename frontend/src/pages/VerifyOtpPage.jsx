@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { otpVerificationService } from "../services/otpVerificationService";
 import { Popup } from "./OtpSuccessPopup";
-export default function VerifyOtp({email}){
+export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");    
@@ -14,7 +14,7 @@ export default function VerifyOtp({email}){
             const response = await otpVerificationService(otp, email);
             setMessage(response.message);
             setShowPopup(true);
-            setTimeout(()=>setShowPopup(false),8000);
+            // setTimeout(()=>setShowPopup(false),8000);
         }catch(err){
             setMessage(err.message);
         }finally{
@@ -45,7 +45,7 @@ export default function VerifyOtp({email}){
                 </button>
             </form>
             {message && <p>{message}</p>}
-            {showPopup && <Popup message={message} email={email}/>}
+            {showPopup && <Popup message={message} email={email} setCurrentPage={setCurrentPage} setVerifiedEmail={setVerifiedEmail}/>}
         </div>
     );
 }

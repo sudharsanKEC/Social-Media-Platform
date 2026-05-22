@@ -1,66 +1,123 @@
 import { useState } from "react"
 import SignupError from "./SignupError.jsx"
+import { Eye, EyeOff } from "lucide-react"
 function Signup({email}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showErrorPopup, setShowErrorPopup] = useState(false);
     const [message, setMessage] = useState("");
     // const message = "Confirm password doesn't match password";
     const validateSignup = (event)=>{
 
         event.preventDefault();
+
+        if(username.trim().length === 0 && password.trim().length<6 || password.trim().length>25){
+            setMessage("Please provide valid username and password");
+            setShowErrorPopup(true);
+            return;
+        }
+
         if(username.trim().length === 0){
             setMessage("Username can't be empty");
+            setShowErrorPopup(true);
+            return;
         }
         if(password !== confirmPassword){
             setMessage("Both passwords should match!");
+            setShowErrorPopup(true);
+            return;
         }
         if(password.trim().length<6 || password.trim().length>25){
             setMessage("Password length must be greater than or equal to 6 and less than or equal to 25");
+            setShowErrorPopup(true);
+            return;
         }
 
-
+        setMessage("");
 
     }
     return(
         <div>
-            <form onSubmit={validateSignup}>
+            <h1 className="text-center">Signup Page</h1> <br />
+            <form onSubmit={validateSignup} className="flex flex-col gap-4 w-[300px] mx-auto">
                 <input
                     type="email"
-                    id="email"
+                    // id="email"
                     value={email}
+                    className="border p-2"
                     readOnly
                 />
+
                 <input 
-                type="text" 
-                id="username"
-                value={username}
-                onChange={(event)=>{
-                    setUsername(event.target.value);
-                }}
+                    type="text" 
+                    // id="username"
+                    value={username}
+                    className="border p-2"
+                    placeholder="Enter username"
+                    onChange={(event)=>{
+                        setUsername(event.target.value);
+                    }}
                 />
-                <input 
-                type="password" 
-                id="password"
-                value={password}
-                onChange={(event)=>{
-                    setPassword(event.target.value);
-                }}
-                />
-                <input 
-                type="password" 
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(event)=>{
-                    setConfirmPassword(event.target.value);
-                    {password !== confirmPassword && <p>{message}</p>}
-                }}
-                />
+                <div className="relative">
+                    <input 
+                        
+                        // id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        placeholder="Enter password"
+                        className="border p-2 pr-10 w-full"
+                        onChange={(event)=>{
+                            setPassword(event.target.value);
+                        }}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                        onClick={() => {
+                            setShowPassword(!showPassword);
+                        }}
+                    >
+                        {password.length !== 0 && (showPassword ? <EyeOff size={15}/> : <Eye size={15}/>)}
+                    </button>
+                </div>
+                
+                <div className="relative">
+                    <input 
+                        type={showConfirmPassword ? "text" : "password"}
+                        // id="confirmPassword"
+                        value={confirmPassword}
+                        className="border p-2 pr-10 w-full"
+                        placeholder="Re-Enter password for confirmation"
+                        onChange={(event)=>{
+                            setConfirmPassword(event.target.value);
+                        }}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                        onClick={()=>{
+                            setShowConfirmPassword(!showConfirmPassword);
+                        }}
+                    >
+                        {confirmPassword.length !== 0 && (showConfirmPassword ? <EyeOff size={15}/>:<Eye size={15}/>)}
+                    </button>
+                </div>
+
                 <button 
-                type="submit" >
+                    type="submit" 
+                    className="bg-blue-600 text-white p-2 rounded cursor-pointer"
+                    
+                >
                     Signup
                 </button>
             </form>  
+            {
+                showErrorPopup &&
+                <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup}/>
+            }
         </div>
     )
 }

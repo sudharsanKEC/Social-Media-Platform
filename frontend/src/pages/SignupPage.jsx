@@ -1,16 +1,20 @@
 import { useState } from "react"
 import SignupError from "./SignupError.jsx"
 import { Eye, EyeOff } from "lucide-react"
-function Signup({email}){
+import { userRegister } from "../services/userSignupService.js";
+import { Popup } from "./SignupSuccessPopup.jsx"
+function Signup({email, setActiveUsername, setCurrentPage}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [showErrorPopup, setShowErrorPopup] = useState(false);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(""); // for errors
+    const [successPopup, setSuccessPopup] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(""); // for success message
     // const message = "Confirm password doesn't match password";
-    const validateSignup = (event)=>{
+    const validateSignup = async (event)=>{
 
         event.preventDefault();
 
@@ -36,11 +40,22 @@ function Signup({email}){
             return;
         }
 
+        try {
+            const response = await userRegister(email, username, password, confirmPassword);
+            console.log(response.message);
+            setSuccessMessage(response.message);
+            setActiveUsername(username);
+            setSuccessPopup(true);
+        } catch (error) {
+            console.log(error);
+            setMessage(error);
+        }
         setMessage("");
-
+        
     }
     return(
         <div>
+            <h1 className="text-center">Social Media Platform</h1> <br />
             <h1 className="text-center">Signup Page</h1> <br />
             <form onSubmit={validateSignup} className="flex flex-col gap-4 w-[300px] mx-auto">
                 <input
@@ -118,6 +133,8 @@ function Signup({email}){
                 showErrorPopup &&
                 <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup}/>
             }
+            {message && <p>{setMessage}</p>}
+            {successPopup && <Popup successMessage={successMessage} setCurrentPage={setCurrentPage} username={username}/>}
         </div>
     )
 }

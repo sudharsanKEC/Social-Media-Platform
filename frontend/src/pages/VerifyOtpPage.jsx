@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { otpVerificationService } from "../services/otpVerificationService";
-import { Popup } from "./OtpSuccessPopup";
+import { Popup } from "./SuccessPopup";
 export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);

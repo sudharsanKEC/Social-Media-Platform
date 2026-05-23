@@ -28,6 +28,7 @@ export default function SendOtpPage({setCurrentPage, setVerifiedEmail}) {
 
     return (
         <div style={{ color: "black" }}>
+            <h1 className="text-center">Social Media Platform</h1> <br />
             <h1>Email:</h1>
             <form onSubmit={handleOtp}>
                 <input

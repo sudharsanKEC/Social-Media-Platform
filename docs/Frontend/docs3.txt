@@ -1,0 +1,132 @@
+What is useState and how does it works?
+    useState is one of the most important ideas in React because it solves a huge limitation of normal JavaScript variables in UI rendering.
+
+Problem with normal variables inside components
+Example:
+        function Counter() {
+            let count = 0;
+            const increment = () => {
+                count++;
+                console.log(count);
+            };
+            return (
+                <button onClick={increment}>
+                    {count}
+                </button>
+            );
+        }
+    Looks correct.
+    But it fails.
+    Why?
+        Because every render runs the function AGAIN.
+        So React does:
+            Counter();
+        Then later:
+            Counter();
+        Each time:
+            let count = 0;
+        runs again.
+        So the value resets.
+    
+    React needed persistent storage outside the function
+        This is where state comes in.
+        Instead of storing data INSIDE the function:
+            let count = 0;
+        React stores it OUTSIDE the component internally.
+        Conceptually:
+            ReactStorage = {
+                count: 0
+            }
+        Then on re-render:
+            function Counter() {
+                const count = ReactStorage.count;
+            }
+        Now value persists across renders.
+
+What useState does
+Example:
+    const [count, setCount] = useState(0);
+This does 2 things:
+    A) Stores persistent state
+            count = 0
+       inside React’s internal memory.
+    B) Gives a setter function
+            setCount(newValue)
+        which:
+            updates stored value
+            tells React to re-render component
+Conceptual simplified implementation
+    Very simplified fake React:
+        let state;
+        function useState(initialValue) {
+            if (state === undefined) {
+                state = initialValue;
+            }
+            function setState(newValue) {
+                state = newValue;
+
+                render();
+            }
+            return [state, setState];
+        }
+    Simulated render
+        function Counter() {
+            const [count, setCount] = useState(0);
+            console.log(count);
+            return {
+                click: () => setCount(count + 1)
+            };
+        }
+
+Why array syntax?
+    const [count, setCount] = useState(0);
+    because useState() returns an array:
+        [storedValue, setterFunction]
+    Equivalent:
+        const stateArray = useState(0);
+        const count = stateArray[0];
+        const setCount = stateArray[1];
+    Array destructuring is just cleaner.
+
+How React tracks multiple states
+    Example:
+        const [name, setName] = useState("");
+        const [age, setAge] = useState(20);
+    React internally stores states in order.
+        Conceptually:
+            states = ["", 20]
+        React also keeps an index:
+            0 → name
+            1 → age
+        That’s why hooks must always run in same order.
+
+Why hooks cannot be inside conditions
+    Invalid:
+        if (loggedIn) {
+            useState(0); // ❌
+        }
+    Because React depends on fixed order.
+    Example:
+        Render 1:
+            0 → count
+            1 → age
+        Render 2:
+            Condition skipped:
+                0 → age
+        Now states mismatch completely.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

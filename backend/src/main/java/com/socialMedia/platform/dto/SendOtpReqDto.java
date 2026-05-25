@@ -2,18 +2,17 @@ package com.socialMedia.platform.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.NonNull;
 
-public class SendOtpRequest {
+public class SendOtpReqDto {
 
     @Email(message="Invalid email") // If the email is not valid then this message will be displayed.
     @NotBlank(message = "Email is required")
     private String email;
 
-    public SendOtpRequest() {
+    public SendOtpReqDto() {
     }
 
-    public SendOtpRequest(String email) {
+    public SendOtpReqDto(String email) {
         this.email = email;
     }
 

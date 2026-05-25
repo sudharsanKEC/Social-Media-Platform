@@ -3,7 +3,7 @@ package com.socialMedia.platform.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class VerifyOtpRequest {
+public class VerifyOtpReqDto {
 
     @Email(message="Invalid email")
     @NotBlank(message="Email is required")
@@ -16,7 +16,7 @@ public class VerifyOtpRequest {
     @NotBlank(message="OTP is required")
     String otp;
 
-    public VerifyOtpRequest() {
+    public VerifyOtpReqDto() {
     }
 
     public String getEmail() {
@@ -35,7 +35,7 @@ public class VerifyOtpRequest {
         this.otp = otp;
     }
 
-    public VerifyOtpRequest(String email, String otp) {
+    public VerifyOtpReqDto(String email, String otp) {
         this.email = email;
         this.otp = otp;
     }

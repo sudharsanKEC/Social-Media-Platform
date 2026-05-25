@@ -11,15 +11,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignupDTO {
-
-    @Email(message="Invalid email")
-    @NotBlank(message = "Email is required")
+public class LoginDto {
+    @Email
+    @NotBlank
     private String email;
-    @NotBlank(message="Password can't be blank")
+    @NotBlank
     private String password;
-    @NotBlank(message="Password can't be blank")
-    private String confirmPassword;
-    @NotBlank(message = "Username can't be blank")
-    private String username;
+
 }

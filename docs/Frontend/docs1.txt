@@ -1,0 +1,123 @@
+Module importing and exporting:
+    Every .jsx and .js file is treated as a module. And the function inside them can be exported and imported via the export and import keywords.
+    They also follow some specific syntax which is similar to the objects and object destructuring.
+    The exporting can be categorized into two parts,
+                i)  Normal function exporting.
+                ii) Default (default) function exporting.
+    The files with .js and .jsx are considered as modules.
+    For example, 
+    Calculator.js:
+        const add = (a,b)=>a+b;
+        const sub = (a,b)=>a-b;
+        const mul = (a,b)=>a*b;
+        const div = (a,b)=>a/b;
+
+        export default sub;
+        export {add, mul, div};
+    We can have n number of export lines in a module file.
+    And also the normal(non-default) function can only be exactly 1 or 0. No more than 1 export.
+    The below are other valid ways to export a function:
+        export const mul = (a,b)=>a*b; 
+    Its direct exporting, now export seperately on the bottom.
+    For default function:
+        export default (a, b) => a - b;
+    Note: No function name is here, function shouldn't used with default.
+
+    The exporting of the non default function is like {add, mul, div}.
+    Its like exporting a dictionary and that it was made available to other files for importing as well.
+    And it can be imported as |import {add, mul, div} from "./Calculator.js"| in other files and the names should exactly match with the name that how its exported {add, mul, div}. So importing it as import {a, m, d} from "./Calculator.js" is wrong.
+    But we can do like import {add as a, mul as m, div as d} from "./Calculator.js. (This can also done in objects like Correct syntax:
+
+const { name: myName } = obj;
+
+Meaning:
+
+take property name
+store it in variable myName)
+
+    Why its similar to object destructuring?
+    Because in object destructuring:
+        const obj = {
+            name: "Sudharsan"
+        };
+        const { name } = obj;    
+    Here {} means: “Take property named name from object.”
+    So importing with same name is similar to this one.
+    Import syntax
+        import { add } from "./math.js";
+    Here {} means:
+        “Import the named export called add.”
+    Very similar syntax.
+    But Different mechanism behind.
+
+    The importing of export default function is different from the normal one, because we import it with whatever the name we want.
+    Eg:
+        import Sub from "./Calculator.js"
+    We can use any different name, because there will be exactly one default function in a module.
+    
+    Multiple exports example:
+        // math.js
+
+        export const add = () => {};
+        export const subtract = () => {};
+
+        const multiply = () => {};
+
+        export default multiply;
+    
+    Importing:
+        import multiply, { add, subtract } from "./math.js";
+    Explanation:
+        multiply → default export
+        { add, subtract } → named exports
+
+    Important practical rule
+        Use default export when:
+            The file mainly exports ONE thing.
+        Example:
+            React component
+            single utility
+            single class
+        Use named exports when:
+            The file exports MULTIPLE things.
+        Example:
+            export const login = () => {};
+            export const register = () => {};
+            export const logout = () => {};
+
+Note: A nested function cannot be exported.
+
+
+IMPORTANT:
+    Import/export is STATIC
+    This is a huge difference from objects.
+    Object destructuring:
+        const { something } = obj;
+    happens at runtime.
+
+    But imports are analyzed BEFORE code execution.
+    JavaScript engine scans imports first.
+    That’s why imports must usually stay:
+        at top level
+        outside functions
+        outside conditions
+    Example:
+        if (true) {
+            import { add } from "./math.js"; // ❌ invalid
+        }
+    because imports are static.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

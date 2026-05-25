@@ -7,6 +7,8 @@ export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
     const [message, setMessage] = useState("");    
     const [showPopup, setShowPopup] = useState(false);
     
+    // React/browser passes the event object automatically.
+    // It was passed here through the onSubmit attribute of the form tag below.
     const otpVerificationResponse = async (event)=>{
         event.preventDefault();
         try{
@@ -26,14 +28,26 @@ export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
         <div>
             <h2>Enter OTP for verification</h2>
             <form onSubmit={otpVerificationResponse}>
+                    {/* When form submits:
+                            browser creates submit event
+                            React wraps/handles it
+                            passes it into your function automatically
+                    Conceptually:
+                            otpVerificationResponse(eventObject); */}
                 <input
-                    type="text"
+                    type="number"
                     className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand block px-3 py-2 shadow-xs placeholder:text-body w-[200px] inline-block mr-5" 
                     placeholder="Enter the OTP"
                     value={otp}
                     onChange={(event)=>{
                         setOtp(event.target.value);
                     }}
+                    /*
+                    When the input changes:
+                        User types something
+                        browser creates an event object automatically.
+                        React receives it and passes it into your function.
+                    */
                     required
                 />
                 <button type="submit"
@@ -49,3 +63,31 @@ export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
         </div>
     );
 }
+
+/*
+Why event parameter works even though you never pass it
+    Because callback/event systems automatically inject arguments.
+    Same happens in plain JavaScript.
+React event system
+    React listens to browser events internally.
+    When event occurs:
+        browser event occurs
+        ↓
+        React catches it
+        ↓
+        React calls your handler
+        ↓
+        passes event object
+What is inside event?
+    Example:
+        console.log(event);
+    You’ll see properties like:
+        event.target
+        event.type
+        event.preventDefault ---> This stops browser default form behavior.
+                                    Normally form submit causes:
+                                                    page refresh/reload
+                                    React apps usually prevent that.
+        event.currentTarget
+
+*/

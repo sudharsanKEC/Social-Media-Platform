@@ -2,6 +2,7 @@ import { useState } from "react";
 import SendOtpPage from "./pages/SendOtpPage.jsx"
 import { Signup } from "./pages/SignupPage.jsx";
 import Home from "./pages/Home.jsx"
+import LoginPage from "./pages/LoginPage.jsx";
 function App() {
 
   const [currentPage, setCurrentPage] = useState("SEND_OTP");
@@ -24,6 +25,11 @@ function App() {
       }
       {
         currentPage === "HOME" && <Home activeUsername={activeUsername}/>
+      }
+      {
+        currentPage === "LOGIN" && <LoginPage 
+        setActiveUsername={setActiveUsername} 
+        setCurrentPage={setCurrentPage}/>
       }
     </div>
   );

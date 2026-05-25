@@ -62,7 +62,9 @@ public class SignupService {
         }
 
         // password regex
+        if(username.trim().length() == 0){
 
+        }
 
 
         User user = new User();
@@ -81,8 +83,9 @@ public class SignupService {
         user.setUserCreatedAt(LocalDateTime.now());
 
         user.setUserPostsCount(0L);
-
+        user.setLastLogin(LocalDateTime.now());
         userRepository.save(user);
+
         return "Successfully registered your account, you can start explore!";
     }
 }

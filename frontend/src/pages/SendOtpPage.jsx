@@ -54,6 +54,14 @@ export default function SendOtpPage({setCurrentPage, setVerifiedEmail}) {
                 </button>
             </form>
             {message && <p>{message}</p>}
+            <p>Already have an account?</p>
+            <p>Click below to login</p>
+            <button 
+                type="button"
+                className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
+                onClick={()=>{
+                    setCurrentPage("LOGIN")
+                }}> LOGIN</button>
             <br />
             {otpSent && <VerifyOtp 
                 email={email} 

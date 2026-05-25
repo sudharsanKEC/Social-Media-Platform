@@ -129,6 +129,15 @@ public class GlobalExceptionHandler {
         hm.put("error",errors);
         return new ResponseEntity(hm,HttpStatus.FORBIDDEN);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException exception){
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("Timestamp",LocalDateTime.now());
+        response.put("status",HttpStatus.NOT_FOUND.value());
+        response.put("message",exception.getMessage());
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    }
 }
 
 /*

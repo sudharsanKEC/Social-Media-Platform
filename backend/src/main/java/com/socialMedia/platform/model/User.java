@@ -37,5 +37,6 @@ public class User {
 
     private Long userPostsCount;
 
+    private LocalDateTime lastLogin;
 
 }

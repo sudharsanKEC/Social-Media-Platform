@@ -1,0 +1,153 @@
+Errors in JS:
+    The JS error is an object and it has several properties like message and so on.
+
+1. Basic Error object
+    Example:
+        throw new Error("Invalid OTP");
+    or:
+        const error = new Error("Invalid OTP");
+        console.log(error);
+    You’ll see something like:
+        Error: Invalid OTP
+            at ...
+
+2. Important properties
+    error.message
+        The message you passed.
+    Example:
+        error.message
+    Output:
+        "Invalid OTP"
+
+    error.name
+        Type/name of error.
+    Example:
+        error.name
+    Output:
+        "Error"
+
+3. Built-in error types
+    JavaScript has multiple error classes.
+    SyntaxError
+        JSON.parse("{");
+        --> SyntaxError
+
+    TypeError
+        null.toUpperCase();
+        --> TypeError
+    
+    ReferenceError
+        console.log(x);
+        --> ReferenceError
+
+4. error.stack
+        Very important for debugging.
+        Contains stack trace.
+    Example:
+        console.log(error.stack);
+    Output conceptually:
+        Error: Invalid OTP
+            at login.js:5
+            at app.js:10
+    It shows:
+        where error occurred
+        function call chain
+
+5. Full example
+        try {
+            throw new Error("Invalid OTP");
+        } catch(error) {
+
+            console.log(error.name);
+            console.log(error.message);
+            console.log(error.stack);
+        }
+
+6. Error object structure conceptually
+        Conceptually:
+            {
+                name: "Error",
+                message: "Invalid OTP",
+                stack: "stack trace..."
+            }
+
+7. Custom properties
+        You can add your own properties.
+    Example:
+        const error = new Error("Unauthorized");
+
+        error.status = 401;
+        error.code = "INVALID_TOKEN";
+
+        throw error;
+
+    Then:
+        catch(error) {
+            console.log(error.status);
+        }
+
+8. Custom Error classes
+        Very common in backend/frontend.
+    Example:
+        class ValidationError extends Error {
+
+            constructor(message) {
+                super(message);
+
+                this.name = "ValidationError";
+            }
+        }
+    Usage:
+        throw new ValidationError("Username required");
+
+9. Why super(message)?
+        Because Error is a class internally.
+            class ValidationError extends Error
+        inherits from Error class.
+
+10. In your React code
+        You wrote:
+            catch(err){
+                setMessage(err.message);
+            }
+        This works because:
+                err
+            is an Error object.
+        and:
+            err.message
+        contains the message.
+
+11. Axios/fetch errors can contain more
+        For example Axios errors often have:
+            error.response
+            error.response.data
+            error.response.status
+        Example:
+            catch(error){
+                console.log(error.response.data);
+            }
+        because libraries extend error objects.
+
+12. Important thing
+        You can throw ANYTHING in JavaScript.
+        Example:
+            throw "wrong";
+        or:
+            throw 404;
+        But best practice is:
+            throw new Error("message");
+        because Error objects contain stack traces and debugging info.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

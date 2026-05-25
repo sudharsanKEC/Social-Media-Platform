@@ -1,5 +1,3 @@
-import {Signup} from "./SignupPage"
-import { useState } from "react";
 function Popup({message, email, setCurrentPage, setVerifiedEmail}){
 
     return (
@@ -10,9 +8,6 @@ function Popup({message, email, setCurrentPage, setVerifiedEmail}){
               </div>
               <div>
                 <p className="font-black text-blue text-base">{message}</p>
-                <p className="text-[13px] text-text mt-1 max-w-xs">
-                  {message}
-                </p>
               </div>
               <button 
               className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" 

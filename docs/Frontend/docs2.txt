@@ -1,0 +1,168 @@
+How does the JSX and the functions works and also what is rendering?
+    JSX was introduced by the Meta (formerly Facebook) React team.
+    So:
+        JSX belongs to React ecosystem
+        created for React development
+        but JSX itself is NOT part of JavaScript officially
+    The JSX was converted into javascript by tools like Babel, esbuild. Vite uses esbuild.
+    JSX gets converted into normal JavaScript BEFORE running. The conversion from JSX to JS is called transpilation.
+    Example:
+        function App() {
+            return <h1>Hello</h1>;
+        }
+    gets transformed into something conceptually like:
+        function App() {
+            return React.createElement(
+                "h1",
+                null,
+                "Hello"
+            );
+        }
+
+What does Vite do?
+    Vite is a build tool/dev server.
+    It helps by:
+        converting JSX
+        bundling files
+        hot reload
+        fast development server
+    So Vite processes:
+        <h1>Hello</h1>
+    into JavaScript React can understand.
+
+
+How jsx are rendered?
+    Step 1: Browser loads app.
+    Step 2: React starts. Usually: createRoot(document.getElementById("root")).render(<App />);
+    Step 3: React calls component: App();
+    Step 4: JSX returned: <h1>Hello</h1>
+    Step 5: Converted into React elements.
+    Step 6: React creates DOM nodes. Browser shows UI.
+
+When does re-rendering happens in react?
+    The 5 Triggers of a React Re-render:
+        1. State Changes (The Core Trigger)
+            When a component’s internal state updates (via useState or useReducer), React schedules a re-render for that specific component to reflect the new data.
+        2. Props Change (The Downstream Trigger)
+            When a parent component passes a new value down as a prop, the child component re-renders to display the fresh information.
+        3. Parent Component Re-renders (The Cascade Trigger)
+            This is the one that surprises many beginners. If a parent component re-renders, ALL of its children will automatically re-render by default, even if their props didn't change at all!
+            (Note: You can stop this specific behavior by wrapping a child component in React.memo, which forces it to only re-render if its props actually change).
+        The Two "Hidden" Triggers
+        4. Context Changes (useContext)
+            If your component is consuming data from a React Context Provider using the useContext hook, it will automatically re-render the exact moment the value inside that Context Provider changes. This happens completely independently of props or parent re-renders.
+        5. Force Updates (forceUpdate or Custom Hooks)
+            In class components, there used to be a literal this.forceUpdate() method. In modern functional React, you can force a component to re-render on command by using external state stores (like Redux or Zustand) or by writing a hacky custom hook like this:
+
+When the code above return() runs?
+Example:
+    function Counter() {
+        console.log("Running");
+        const [count, setCount] = useState(0);
+        return <h1>{count}</h1>;
+    }
+
+    This entire function runs:
+        initial render
+        every rerender
+    So console prints every render.
+Note: React doesn't rerun only return(), it reruns the whole functional component.
+Another one important point: The states that we use in react has the capability to survive through those re-renders because it maintains memory outside of that component(Usually in RAM).
+
+
+How does react updates the DOM?
+    React uses Virtual DOM to update the actual DOM. 
+    It uses virtual DOM, because operations on DOM is costly.
+    So, it maintains a virtual DOM and by referring to that virtual DOM, it updates the actual DOM partly which is an optimized way.
+    Important:
+        Old react uses virtual DOM, but now react currently uses Fiber tree, which was more complex and optimized than the virtual DOM.
+
+    Modern React:
+        React introduced: Fiber Architecture, around React 16. Fiber is React’s internal rendering engine.
+    
+    What is a Fiber?
+        A Fiber is a JavaScript object representing:
+            one component / DOM node
+        Example:
+            <App>
+                <Header />
+                <Profile />
+            </App>
+        Internally becomes something conceptually like:
+                Fiber(App)
+                    ├── Fiber(Header)
+                    └── Fiber(Profile)
+        Each node stores:
+            component type
+            props
+            state
+            DOM reference
+            effect info
+            update priority
+            links to parent/child/sibling
+Note: 
+    React keeps TWO trees
+    YES.
+    This is extremely important.
+    Current Tree
+    Represents UI currently visible on screen.
+    Work-In-Progress Tree
+    New tree React is building during rerender.
+    Conceptually:
+        CURRENT TREE
+        <App count=0 />
+
+        WORK TREE
+        <App count=1 />
+    Why two trees?
+        Because React wants safe updates.
+        Instead of changing current UI immediately:
+            React builds new version separately
+            Then swaps them efficiently.
+
+What is reconciliation?
+    Reconciliation is: the process React uses to compare old tree vs new tree and determine updates
+    This entire process is called reconciliation.
+    Diffing:
+        Diffing is PART of reconciliation.
+        It means:
+            compare old virtual tree vs new virtual tree
+        Example:
+            Old:
+                <h1>0</h1>
+            New:
+                <h1>1</h1>
+            Diff result:
+                Only text changed
+    Then commit phase happens
+        After diffing:
+            React updates only changed real DOM part.
+        Example:
+            change text node:
+            0 → 1
+        instead of recreating entire page.
+
+React internally treats the UI as a giant component tree, and Fiber is React’s internal structure for managing that tree efficiently.
+Fiber is also a one giant tree.
+React maintains a huge connected tree structure.
+    Conceptually:
+            Root
+            └── App
+                ├── Header
+                ├── Sidebar
+                └── Feed
+                    ├── Post
+                    ├── Post
+                    └── Post
+    Each node is a Fiber object.
+
+
+
+
+
+
+
+
+
+
+

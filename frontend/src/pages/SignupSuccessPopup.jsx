@@ -1,5 +1,3 @@
-import {Signup} from "./SignupPage"
-import { useState } from "react";
 function Popup({successMessage, setCurrentPage, username}){
 
     return (

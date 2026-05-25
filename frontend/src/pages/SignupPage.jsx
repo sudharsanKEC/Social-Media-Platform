@@ -18,7 +18,7 @@ function Signup({email, setActiveUsername, setCurrentPage}){
 
         event.preventDefault();
 
-        if(username.trim().length === 0 && password.trim().length<6 || password.trim().length>25){
+        if(username.trim().length === 0 && (password.trim().length<6 || password.trim().length>25)){
             setMessage("Please provide valid username and password");
             setShowErrorPopup(true);
             return;
@@ -41,6 +41,7 @@ function Signup({email, setActiveUsername, setCurrentPage}){
         }
 
         try {
+            setMessage("");
             const response = await userRegister(email, username, password, confirmPassword);
             console.log(response.message);
             setSuccessMessage(response.message);
@@ -48,9 +49,9 @@ function Signup({email, setActiveUsername, setCurrentPage}){
             setSuccessPopup(true);
         } catch (error) {
             console.log(error);
-            setMessage(error);
+            setMessage(error.message);
         }
-        setMessage("");
+       
         
     }
     return(
@@ -133,7 +134,7 @@ function Signup({email, setActiveUsername, setCurrentPage}){
                 showErrorPopup &&
                 <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup}/>
             }
-            {message && <p>{setMessage}</p>}
+            {message && <p>{message}</p>}
             {successPopup && <Popup successMessage={successMessage} setCurrentPage={setCurrentPage} username={username}/>}
         </div>
     )

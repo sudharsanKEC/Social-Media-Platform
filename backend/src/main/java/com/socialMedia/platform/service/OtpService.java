@@ -36,7 +36,7 @@ public class OtpService {
 
         Optional<User> emailExists = userRepository.findByUserEmail(email);
         if(emailExists.isPresent()){
-            throw new UserAlreadyExistsException("User with this email already exists!");
+            throw new UserAlreadyExistsException("User with this email already exists, please use a new email!");
         }
 
         String generatedOtp = generateOtp();

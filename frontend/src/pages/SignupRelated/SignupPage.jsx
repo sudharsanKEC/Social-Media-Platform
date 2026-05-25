@@ -1,9 +1,9 @@
 import { useState } from "react"
 import SignupError from "./SignupError.jsx"
 import { Eye, EyeOff } from "lucide-react"
-import { userRegister } from "../services/userSignupService.js";
+import { userRegister } from "../../services/userSignupService.js";
 import { Popup } from "./SignupSuccessPopup.jsx"
-function Signup({email, setActiveUsername, setCurrentPage}){
+function Signup({email, setActiveUsername}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");

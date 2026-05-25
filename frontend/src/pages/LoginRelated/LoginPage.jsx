@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { verifyLoginService } from "../services/verifyLoginService";
-const LoginPage = ({setActiveUsername, setCurrentPage})=>{
+import { verifyLoginService } from "../../services/verifyLoginService";
+
+export const LoginPage = ({setActiveUsername, setCurrentPage})=>{
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState("");
+
     const handleLogin = async (event)=>{
         event.preventDefault();
         if(email.trim().length === 0 && password.trim().length === 0){
@@ -84,4 +87,3 @@ const LoginPage = ({setActiveUsername, setCurrentPage})=>{
         </div>
     )
 }
-export default LoginPage;

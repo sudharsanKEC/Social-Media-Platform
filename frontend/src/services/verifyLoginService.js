@@ -1,5 +1,5 @@
 const verifyLoginService = async (email, password)=>{
-    const api = "http://localhost:8080/api/auth/login";
+    const api = `${import.meta.env.VITE_API_BASE_URL}/login`;
     try{
         const response =  await fetch(api,{
             method: "POST",

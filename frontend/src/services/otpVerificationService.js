@@ -1,5 +1,6 @@
 const otpVerificationService = async (otp, email)=>{
-    const url = "http://localhost:8080/api/auth/verify-otp";
+
+    const url = `${import.meta.env.VITE_API_BASE_URL}/verify-otp`;
     try{
         const response = await fetch(url, {
             method: "POST",

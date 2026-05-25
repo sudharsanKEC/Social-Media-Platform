@@ -1,7 +1,42 @@
 import { useState } from "react";
-import { otpVerificationService } from "../services/otpVerificationService";
-import { Popup } from "./SuccessPopup";
-export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
+import { Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { otpVerificationService } from "../../services/otpVerificationService";
+import { Popup } from "../SuccessPopup";
+
+export function VerifyOtpPage({setVerifiedEmail}){
+
+    const location = useLocation(); 
+    const email = location.state?.email; // getting the email from 
+
+    if(!email) // used to prevent user from directly entering to the verify-otp page without proper email.
+    {
+        return <Navigate to="/send-otp" replace /> // replace means: Replace current history entry instead of adding new one
+        /*
+            Without replace
+                History stack:
+                    /send-otp
+                    /verify-otp
+            If redirected:
+                <Navigate to="/send-otp" />
+            then history becomes:
+                /send-otp
+                /verify-otp
+                /send-otp
+            Now browser back button goes to:
+                /verify-otp
+            again.
+
+            With replace: <Navigate to="/send-otp" replace /> React Router REPLACES current entry. 
+            History becomes:
+                /send-otp
+                /send-otp
+            (or effectively current page replaced)
+            Now back button won't return to invalid /verify-otp.
+        
+        */        
+    }
+
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");    
@@ -14,6 +49,7 @@ export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
         try{
             setLoading(true);
             const response = await otpVerificationService(otp, email);
+            setVerifiedEmail(email);
             setMessage(response.message);
             setShowPopup(true);
             // setTimeout(()=>setShowPopup(false),8000);
@@ -59,7 +95,7 @@ export default function VerifyOtp({email, setCurrentPage, setVerifiedEmail}){
                 </button>
             </form>
             {message && <p>{message}</p>}
-            {showPopup && <Popup message={message} email={email} setCurrentPage={setCurrentPage} setVerifiedEmail={setVerifiedEmail}/>}
+            {showPopup && <Popup message={message} email={email} />}
         </div>
     );
 }

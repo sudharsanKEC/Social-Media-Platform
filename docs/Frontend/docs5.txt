@@ -1,0 +1,29 @@
+Disadvantages before the optimization and structuring and also its solutions.
+
+Disadvantages of the Current Architecture (and what solves them)
+    1. Prop drilling
+            setCurrentPage, setVerifiedEmail, setActiveUsername are passed down through multiple components. As the app grows, every new page needs these passed through. This becomes unmanageable.
+            Solved by: Redux Toolkit (centralized state) — Phase 3.
+
+    2. No URL-based navigation
+            The user can't bookmark /signup or /home. Pressing the browser back button does nothing meaningful. Sharing a link to a specific page is impossible.
+            Solved by: React Router — Phase 2.
+
+    3. State lost on page refresh
+            activeUsername, verifiedEmail all live in React state. Refreshing the browser wipes everything and sends the user back to the OTP page.
+            Solved by: JWT stored in localStorage/sessionStorage + Redux rehydration — Phase 4.
+
+    4. App.jsx is the single source of truth for everything
+            All shared state lives in App.jsx. As you add more features (profile, posts, friends), App.jsx will become an enormous, unreadable file.
+            Solved by: Redux Toolkit slices — Phase 3 (an authSlice, later a postSlice, userSlice, etc.)
+
+    5. No route protection
+            Right now, a user can theoretically be set to currentPage("HOME") without logging in — there's no guard. With React Router, you'll implement protected routes that check isAuthenticated before allowing access.
+            Solved by: React Router protected routes + Redux auth state — Phases 2 & 3.
+
+    6. Hardcoded base URLs in every service file
+            Every service file has "http://localhost:8080/api/auth" written directly. When you deploy, you'd need to change every file.
+            Solved by: a single axiosInstance.js or a .env file with VITE_API_BASE_URL, and a shared API client. This is a small fix you can do right now before Phase 2.
+
+    7. VerifyOtp is rendered inside SendOtpPage
+            VerifyOtp is a child of SendOtpPage via conditional rendering ({otpSent && <VerifyOtp .../>}). This means both pages exist on screen at the same time. Once you move to React Router, each will be its own route at /send-otp and /verify-otp.

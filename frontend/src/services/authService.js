@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api/auth";
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
 
 export const sendOtp = async (email) => {
     // Note: fetch() returns a promise, but await of returns the resolved value inside the promise to the variable response below.

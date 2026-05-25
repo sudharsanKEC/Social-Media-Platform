@@ -1,5 +1,5 @@
 const userRegister = async (email, username, password, confirmPassword)=>{
-    const api = "http://localhost:8080/api/auth/signup";
+    const api = `${import.meta.env.VITE_API_BASE_URL}/signup`;
     try{
         
             const response = await fetch(api,{

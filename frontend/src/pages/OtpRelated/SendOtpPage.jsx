@@ -1,26 +1,29 @@
 import { useState } from 'react';
-import { sendOtp } from '../services/authService';
-import VerifyOtp from './VerifyOtpPage';
-export default function SendOtpPage({setCurrentPage, setVerifiedEmail}) {
+import { useNavigate } from 'react-router-dom';
+import { sendOtp } from '../../services/authService';
+
+export function SendOtpPage() {
 
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const [otpSent, setOtpSent] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleOtp = async (event) => {
-        event.preventDefault();
 
+        event.preventDefault();
         setLoading(true);
         setMessage("");
+
         try {
-            setOtpSent(false);
+
             const response = await sendOtp(email);
-            setOtpSent(true);
             setMessage(response.message);
+            navigate("/verify-otp", { state: { email }, replace: true }); // --> Passing the email to the verify-otp page, replace: true
+
         } catch (error) {
             setMessage(error.message);
-            setOtpSent(false);
         } finally {
             setLoading(false);
         }
@@ -40,7 +43,6 @@ export default function SendOtpPage({setCurrentPage, setVerifiedEmail}) {
                     onChange={(event) => {
                         setEmail(event.target.value);
                         setMessage("");
-                        setOtpSent(false);
                     }}
                     required
                 />
@@ -59,15 +61,8 @@ export default function SendOtpPage({setCurrentPage, setVerifiedEmail}) {
             <button 
                 type="button"
                 className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
-                onClick={()=>{
-                    setCurrentPage("LOGIN")
-                }}> LOGIN</button>
+                onClick={()=>navigate("/login")} >LOGIN</button>
             <br />
-            {otpSent && <VerifyOtp 
-                email={email} 
-                setCurrentPage={setCurrentPage} 
-                setVerifiedEmail={setVerifiedEmail}/>
-            }
         </div>
     )
 }

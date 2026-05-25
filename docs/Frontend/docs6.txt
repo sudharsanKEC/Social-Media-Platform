@@ -1,0 +1,100 @@
+Update1:
+    Created .env in frontend/ and then added VITE_API_BASE_URL=http://localhost:8080/api/auth
+    Then updated it in:
+        authService.js
+            const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+        otpVerificationService.js
+            const url = `${import.meta.env.VITE_API_BASE_URL}/verify-otp`;
+        userSignupService.js
+            const api = `${import.meta.env.VITE_API_BASE_URL}/signup`;
+        verifyLoginService.js
+            const api = `${import.meta.env.VITE_API_BASE_URL}/login`;
+
+Update2:
+    Adding react router.
+    Install it: npm install react-router-dom
+        Before writing any code, understand what React Router actually does and why you need it.
+    Right now your app works like this:
+        App.jsx holds currentPage state
+        → "SEND_OTP" renders SendOtpPage
+        → "SIGNUP" renders SignupPage
+        → etc.
+    The URL never changes. It's always localhost:5173. The browser has no idea what "page" you're on.
+        After React Router:
+            localhost:5173/send-otp   → SendOtpPage
+            localhost:5173/verify-otp → VerifyOtpPage
+            localhost:5173/signup     → SignupPage
+            localhost:5173/login      → LoginPage
+            localhost:5173/home       → Home
+    Each page gets a real URL. Browser back/forward works. You can bookmark pages. And navigation becomes navigate("/signup") instead of setCurrentPage("SIGNUP").
+    Current main.jsx:
+        import { StrictMode } from 'react'
+        import { createRoot } from 'react-dom/client'
+        import './index.css'
+        import App from './App.jsx'
+        createRoot(document.getElementById('root')).render(
+            <StrictMode>
+                <App />
+            </StrictMode>,
+        )
+    Change it to main.jsx:
+        import { StrictMode } from 'react'
+        import { createRoot } from 'react-dom/client'
+        import { BrowserRouter } from 'react-router-dom'
+        import './index.css'
+        import App from './App.jsx'
+        createRoot(document.getElementById('root')).render(
+        <StrictMode>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </StrictMode>,
+        )
+    Why here and not inside App.jsx?
+        BrowserRouter needs to wrap everything that will ever use routing — including App.jsx itself. If you put it inside App.jsx, it wraps only its children, not itself. Putting it in main.jsx means the entire app is inside the router context from the very top.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

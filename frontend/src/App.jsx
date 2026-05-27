@@ -6,20 +6,23 @@ import { VerifyOtpPage } from "./pages/OtpRelated/VerifyOtpPage.jsx";
 import { Home } from "./pages/Home.jsx"
 import { LoginPage } from "./pages/LoginRelated/LoginPage.jsx";
 import { Navigate } from "react-router-dom";
+import { ProtectedRoute } from "./routes/ProtectedRoute.jsx";
+import { PublicRoute } from "./routes/PublicRoute.jsx";
+
 function App() {
 
   // const [currentPage, setCurrentPage] = useState("SEND_OTP");
-  const [verifiedEmail, setVerifiedEmail] = useState("");
-  const [activeUsername, setActiveUsername] = useState("");
+  // const [verifiedEmail, setVerifiedEmail] = useState("");
+  // const [activeUsername, setActiveUsername] = useState("");
 
   return (
     <Routes>
         <Route path="/" element={<Navigate to="send-otp" replace/>}/>
         <Route path="/send-otp" element={<SendOtpPage />}/>
-        <Route path="/verify-otp" element={<VerifyOtpPage setVerifiedEmail={setVerifiedEmail}/>} />
-        <Route path="/signup" element={<Signup email={verifiedEmail} setActiveUsername={setActiveUsername}/>}/>
-        <Route path="/login" element={<LoginPage setActiveUsername={setActiveUsername}/>}/>
-        <Route path="/home" element={<Home activeUsername={activeUsername}/>}/>
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
+        <Route path="/signup" element={<PublicRoute> <Signup /> </PublicRoute>}/>
+        <Route path="/login" element={<PublicRoute> <LoginPage /> </PublicRoute>}/>
+        <Route path="/home" element={<ProtectedRoute> <Home /> </ProtectedRoute>}/>
     </Routes>
     /* // <div>
     //   {

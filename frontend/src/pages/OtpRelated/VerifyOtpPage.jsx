@@ -3,8 +3,10 @@ import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { otpVerificationService } from "../../services/otpVerificationService";
 import { Popup } from "../SuccessPopup";
+import { useDispatch } from "react-redux";
+import { setVerifiedEmail } from "../../features/auth/authSlice";
 
-export function VerifyOtpPage({setVerifiedEmail}){
+export function VerifyOtpPage(/*{setVerifiedEmail}*/){
 
     const location = useLocation(); 
     const email = location.state?.email; // getting the email from 
@@ -41,6 +43,7 @@ export function VerifyOtpPage({setVerifiedEmail}){
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");    
     const [showPopup, setShowPopup] = useState(false);
+    const dispatch = useDispatch();
     
     // React/browser passes the event object automatically.
     // It was passed here through the onSubmit attribute of the form tag below.
@@ -49,7 +52,8 @@ export function VerifyOtpPage({setVerifiedEmail}){
         try{
             setLoading(true);
             const response = await otpVerificationService(otp, email);
-            setVerifiedEmail(email);
+            // setVerifiedEmail(email)
+            dispatch(setVerifiedEmail(email));
             setMessage(response.message);
             setShowPopup(true);
             // setTimeout(()=>setShowPopup(false),8000);
@@ -95,7 +99,7 @@ export function VerifyOtpPage({setVerifiedEmail}){
                 </button>
             </form>
             {message && <p>{message}</p>}
-            {showPopup && <Popup message={message} email={email} />}
+            {showPopup && <Popup message={message} />}
         </div>
     );
 }

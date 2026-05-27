@@ -20,7 +20,7 @@ export function SendOtpPage() {
 
             const response = await sendOtp(email);
             setMessage(response.message);
-            navigate("/verify-otp", { state: { email }, replace: true }); // --> Passing the email to the verify-otp page, replace: true
+            navigate("/verify-otp", { state: { email } }); // --> Passing the email to the verify-otp page, replace: true
 
         } catch (error) {
             setMessage(error.message);
@@ -62,6 +62,14 @@ export function SendOtpPage() {
                 type="button"
                 className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
                 onClick={()=>navigate("/login")} >LOGIN</button>
+            <br />
+
+            <p>Already verified?</p>
+            <p>Click below to signup</p>
+            <button 
+                type="button"
+                className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
+                onClick={()=>navigate("/signup")} >SIGNUP</button>
             <br />
         </div>
     )

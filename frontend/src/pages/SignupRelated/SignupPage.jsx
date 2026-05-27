@@ -3,7 +3,11 @@ import SignupError from "./SignupError.jsx"
 import { Eye, EyeOff } from "lucide-react"
 import { userRegister } from "../../services/userSignupService.js";
 import { Popup } from "./SignupSuccessPopup.jsx"
-function Signup({email, setActiveUsername}){
+
+import { useSelector, useDispatch  } from "react-redux";
+import { setActiveUsername, setIsAuthenticated } from "../../features/auth/authSlice.js";
+
+function Signup(/*{ verifiedEmail, setActiveUsername }*/) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,28 +17,35 @@ function Signup({email, setActiveUsername}){
     const [message, setMessage] = useState(""); // for errors
     const [successPopup, setSuccessPopup] = useState(false);
     const [successMessage, setSuccessMessage] = useState(""); // for success message
-    // const message = "Confirm password doesn't match password";
-    const validateSignup = async (event)=>{
+    const [email, setEmail] = useState(verifiedEmail || "");
+
+    const dispatch = useDispatch();
+
+    const verifiedEmail = useSelector(
+        state => state.auth.verifiedEmail
+    );
+
+    const validateSignup = async (event) => {
 
         event.preventDefault();
 
-        if(username.trim().length === 0 && (password.trim().length<6 || password.trim().length>25)){
+        if (username.trim().length === 0 && (password.trim().length < 6 || password.trim().length > 25)) {
             setMessage("Please provide valid username and password");
             setShowErrorPopup(true);
             return;
         }
 
-        if(username.trim().length === 0){
+        if (username.trim().length === 0) {
             setMessage("Username can't be empty");
             setShowErrorPopup(true);
             return;
         }
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             setMessage("Both passwords should match!");
             setShowErrorPopup(true);
             return;
         }
-        if(password.trim().length<6 || password.trim().length>25){
+        if (password.trim().length < 6 || password.trim().length > 25) {
             setMessage("Password length must be greater than or equal to 6 and less than or equal to 25");
             setShowErrorPopup(true);
             return;
@@ -45,47 +56,50 @@ function Signup({email, setActiveUsername}){
             const response = await userRegister(email, username, password, confirmPassword);
             console.log(response.message);
             setSuccessMessage(response.message);
-            setActiveUsername(username);
+            // setActiveUsername(username)
+            dispatch(setActiveUsername(username));
+            dispatch(setIsAuthenticated(true));
             setSuccessPopup(true);
         } catch (error) {
             console.log(error);
             setMessage(error.message);
         }
-       
-        
+
+
     }
-    return(
+    return (
         <div>
             <h1 className="text-center">Social Media Platform</h1> <br />
             <h1 className="text-center">Signup Page</h1> <br />
             <form onSubmit={validateSignup} className="flex flex-col gap-4 w-[300px] mx-auto">
                 <input
                     type="email"
-                    // id="email"
                     value={email}
                     className="border p-2"
-                    readOnly
+                    readOnly={!!verifiedEmail}
+                    placeholder={!verifiedEmail ? "Enter your email" : ""}
+                    onChange={(event)=>setEmail(event.target.value)}
                 />
 
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     // id="username"
                     value={username}
                     className="border p-2"
                     placeholder="Enter username"
-                    onChange={(event)=>{
+                    onChange={(event) => {
                         setUsername(event.target.value);
                     }}
                 />
                 <div className="relative">
-                    <input 
-                        
+                    <input
+
                         // id="password"
                         type={showPassword ? "text" : "password"}
                         value={password}
                         placeholder="Enter password"
                         className="border p-2 pr-10 w-full"
-                        onChange={(event)=>{
+                        onChange={(event) => {
                             setPassword(event.target.value);
                         }}
                     />
@@ -96,48 +110,48 @@ function Signup({email, setActiveUsername}){
                             setShowPassword(!showPassword);
                         }}
                     >
-                        {password.length !== 0 && (showPassword ? <EyeOff size={15}/> : <Eye size={15}/>)}
+                        {password.length !== 0 && (showPassword ? <EyeOff size={15} /> : <Eye size={15} />)}
                     </button>
                 </div>
-                
+
                 <div className="relative">
-                    <input 
+                    <input
                         type={showConfirmPassword ? "text" : "password"}
                         // id="confirmPassword"
                         value={confirmPassword}
                         className="border p-2 pr-10 w-full"
                         placeholder="Re-Enter password for confirmation"
-                        onChange={(event)=>{
+                        onChange={(event) => {
                             setConfirmPassword(event.target.value);
                         }}
                     />
                     <button
                         type="button"
                         className="absolute right-2 top-1/2 -translate-y-1/2"
-                        onClick={()=>{
+                        onClick={() => {
                             setShowConfirmPassword(!showConfirmPassword);
                         }}
                     >
-                        {confirmPassword.length !== 0 && (showConfirmPassword ? <EyeOff size={15}/>:<Eye size={15}/>)}
+                        {confirmPassword.length !== 0 && (showConfirmPassword ? <EyeOff size={15} /> : <Eye size={15} />)}
                     </button>
                 </div>
 
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     className="bg-blue-600 text-white p-2 rounded cursor-pointer"
-                    
+
                 >
                     Signup
                 </button>
-            </form>  
+            </form>
             {
                 showErrorPopup &&
-                <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup}/>
+                <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup} />
             }
             {message && <p>{message}</p>}
-            {successPopup && <Popup successMessage={successMessage} setCurrentPage={setCurrentPage} username={username}/>}
+            {successPopup && <Popup successMessage={successMessage} username={username} />}
         </div>
     )
 }
 
-export {Signup};
+export { Signup };

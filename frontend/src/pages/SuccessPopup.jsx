@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-function Popup({message, email, setCurrentPage, setVerifiedEmail}){
+function Popup({message, verifiedEmail}){
     const navigate = useNavigate();
     return (
         <div className="max-w-xl border mt-5 mx-auto shadow-lg rounded-lg">
@@ -12,7 +12,7 @@ function Popup({message, email, setCurrentPage, setVerifiedEmail}){
               </div>
               <button 
               className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" 
-              onClick={() => navigate("/signup")}>
+              onClick={() => navigate("/signup", { state : {verifiedEmail}})}> 
                 Continue!
               </button>
             </div>

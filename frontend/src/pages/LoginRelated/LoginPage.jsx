@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { verifyLoginService } from "../../services/verifyLoginService";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setActiveUsername } from "../../features/auth/authSlice";
+import { setIsAuthenticated } from "../../features/auth/authSlice";
 
-export const LoginPage = ({setActiveUsername, setCurrentPage})=>{
+export const LoginPage = (/*{setActiveUsername, setCurrentPage}*/)=>{
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState("");
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = async (event)=>{
         event.preventDefault();
@@ -33,8 +40,10 @@ export const LoginPage = ({setActiveUsername, setCurrentPage})=>{
         try{
             setMessage("");
             const response = await verifyLoginService(email, password);
-            setActiveUsername(response.username);
-            setCurrentPage("HOME");
+            // setActiveUsername(response.username);
+            dispatch(setActiveUsername(response.username));
+            dispatch(setIsAuthenticated(true));
+            navigate("/home");
         }catch(error){
             setMessage(error.message);
         }

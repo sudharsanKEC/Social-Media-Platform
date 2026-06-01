@@ -18,7 +18,7 @@ function App() {
   return (
     <Routes>
         <Route path="/" element={<Navigate to="send-otp" replace/>}/>
-        <Route path="/send-otp" element={<SendOtpPage />}/>
+        <Route path="/send-otp" element={<PublicRoute> <SendOtpPage /> </PublicRoute>}/>
         <Route path="/verify-otp" element={<VerifyOtpPage />} />
         <Route path="/signup" element={<PublicRoute> <Signup /> </PublicRoute>}/>
         <Route path="/login" element={<PublicRoute> <LoginPage /> </PublicRoute>}/>

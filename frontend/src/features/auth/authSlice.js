@@ -15,16 +15,22 @@ const authSlice = createSlice({
             setVerifiedEmail: (state, action)=>{
                 state.verifiedEmail = action.payload;
                 localStorage.setItem("verifiedEmail", action.payload);
+                console.log("state: ",state);
+                console.log("action: ",action);
             },
 
             setActiveUsername: (state, action)=>{
                 state.activeUsername = action.payload;
                 localStorage.setItem("activeUsername", action.payload);
+                console.log("state: ",state);
+                console.log("action: ",action);
             },
 
             setIsAuthenticated: (state, action)=>{
                 state.isAuthenticated = action.payload;
                 localStorage.setItem("isAuthenticated", action.payload);
+                console.log("state: ",state);
+                console.log("action: ",action);
             },
 
             logout: (state) => {

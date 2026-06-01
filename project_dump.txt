@@ -1,0 +1,2466 @@
+===== PROJECT TREE =====
+.
+├── backend
+│   ├── Dockerfile
+│   ├── HELP.md
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   ├── README.md
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── socialMedia
+│       │   │           └── platform
+│       │   │               ├── config
+│       │   │               │   ├── CorsConfig.java
+│       │   │               │   └── PasswordConfig.java
+│       │   │               ├── controller
+│       │   │               │   ├── AuthController.java
+│       │   │               │   └── TestController.java
+│       │   │               ├── dto
+│       │   │               │   ├── LoginDto.java
+│       │   │               │   ├── SendOtpReqDto.java
+│       │   │               │   ├── SignupReqDto.java
+│       │   │               │   └── VerifyOtpReqDto.java
+│       │   │               ├── exception
+│       │   │               │   ├── EmailAlreadyVerifiedException.java
+│       │   │               │   ├── EmailNotFoundException.java
+│       │   │               │   ├── EmailNotVerifiedException.java
+│       │   │               │   ├── GlobalExceptionHandler.java
+│       │   │               │   ├── InvalidOtpException.java
+│       │   │               │   ├── InvalidPasswordException.java
+│       │   │               │   ├── InvalidPasswordLengthException.java
+│       │   │               │   ├── OtpExpirationException.java
+│       │   │               │   ├── PasswordMisMatchException.java
+│       │   │               │   ├── TooManyOtpRequestsException.java
+│       │   │               │   ├── UserAlreadyExistsException.java
+│       │   │               │   ├── UserNameAlreadyExistsException.java
+│       │   │               │   └── UserNotFoundException.java
+│       │   │               ├── model
+│       │   │               │   ├── Dummy.java
+│       │   │               │   ├── Followers.java
+│       │   │               │   ├── Friends.java
+│       │   │               │   ├── LoginAttempts.java
+│       │   │               │   ├── OtpVerification.java
+│       │   │               │   └── User.java
+│       │   │               ├── PlatformApplication.java
+│       │   │               ├── repository
+│       │   │               │   ├── DummyRepository.java
+│       │   │               │   ├── OtpVerificationRepository.java
+│       │   │               │   └── UserRepository.java
+│       │   │               ├── service
+│       │   │               │   ├── EmailService.java
+│       │   │               │   ├── LoginService.java
+│       │   │               │   ├── OtpService.java
+│       │   │               │   └── SignupService.java
+│       │   │               └── util
+│       │   └── resources
+│       │       ├── application.properties
+│       │       ├── static
+│       │       └── templates
+│       └── test
+│           └── java
+│               └── com
+│                   └── socialMedia
+│                       └── platform
+│                           └── PlatformApplicationTests.java
+├── devops
+├── frontend
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── README.md
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── components
+│   │   ├── features
+│   │   │   └── auth
+│   │   │       └── authSlice.js
+│   │   ├── hooks
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── Home.jsx
+│   │   │   ├── LoginRelated
+│   │   │   │   └── LoginPage.jsx
+│   │   │   ├── OtpRelated
+│   │   │   │   ├── SendOtpPage.jsx
+│   │   │   │   └── VerifyOtpPage.jsx
+│   │   │   ├── SignupRelated
+│   │   │   │   ├── SignupError.jsx
+│   │   │   │   ├── SignupPage.jsx
+│   │   │   │   └── SignupSuccessPopup.jsx
+│   │   │   └── SuccessPopup.jsx
+│   │   ├── routes
+│   │   │   ├── ProtectedRoute.jsx
+│   │   │   └── PublicRoute.jsx
+│   │   ├── services
+│   │   │   ├── authService.js
+│   │   │   ├── otpVerificationService.js
+│   │   │   ├── userSignupService.js
+│   │   │   └── verifyLoginService.js
+│   │   ├── store
+│   │   │   └── store.js
+│   │   ├── styles
+│   │   │   └── Popup.css
+│   │   └── utils
+│   └── vite.config.js
+├── infra
+└── project_dump.txt
+
+42 directories, 73 files
+
+
+===== FILE CONTENTS =====
+
+
+===== ./devops/.gitkeep =====
+
+
+===== ./infra/.gitkeep =====
+
+
+===== ./frontend/README.md =====
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+===== ./frontend/src/App.css =====
+
+
+===== ./frontend/src/features/auth/authSlice.js =====
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+    verifiedEmail: localStorage.getItem("verifiedEmail") || "",
+    activeUsername: localStorage.getItem("activeUsername") || "",
+    // isAuthenticated: false
+    isAuthenticated: localStorage.getItem("isAuthenticated") === "true"
+};
+
+const authSlice = createSlice({
+    name: "auth",
+    initialState,
+    reducers: {
+
+            setVerifiedEmail: (state, action)=>{
+                state.verifiedEmail = action.payload;
+                localStorage.setItem("verifiedEmail", action.payload);
+            },
+
+            setActiveUsername: (state, action)=>{
+                state.activeUsername = action.payload;
+                localStorage.setItem("activeUsername", action.payload);
+            },
+
+            setIsAuthenticated: (state, action)=>{
+                state.isAuthenticated = action.payload;
+                localStorage.setItem("isAuthenticated", action.payload);
+            },
+
+            logout: (state) => {
+                
+                state.verifiedEmail = "";
+                state.activeUsername = "";
+                state.isAuthenticated = false;
+                
+                localStorage.removeItem("verifiedEmail");
+                localStorage.removeItem("activeUsername");
+                localStorage.removeItem("isAuthenticated");
+            }
+    }
+});
+
+
+
+export const {
+    setVerifiedEmail,
+    setActiveUsername,
+    setIsAuthenticated,
+    logout
+} = authSlice.actions;
+
+export default authSlice.reducer;
+
+===== ./frontend/src/routes/ProtectedRoute.jsx =====
+import { Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+
+export function ProtectedRoute({ children }){
+    
+    const isAuthenticated = useSelector(
+        state => state.auth.isAuthenticated
+    );
+
+    if(!isAuthenticated){
+        return <Navigate to="/login" replace />
+    }
+
+    return children;
+
+}
+
+===== ./frontend/src/routes/PublicRoute.jsx =====
+import { Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+
+export function PublicRoute({ children }){
+    
+    const isAuthenticated = useSelector(
+        state => state.auth.isAuthenticated
+    );
+
+    if(isAuthenticated){
+        return <Navigate to="/home" replace />
+    }
+
+    return children;
+
+}
+
+===== ./frontend/src/index.css =====
+@import "tailwindcss";
+
+===== ./frontend/src/services/otpVerificationService.js =====
+const otpVerificationService = async (otp, email)=>{
+
+    const url = `${import.meta.env.VITE_API_BASE_URL}/verify-otp`;
+    try{
+        const response = await fetch(url, {
+            method: "POST",
+            headers:{"content-type":"application/json"},
+            body: JSON.stringify({otp:otp, email:email})
+        });
+
+        const data = await response.json();
+        if(!response.ok){
+            throw new Error( data.message || "OTP can't be verified");
+        }
+        return data;
+    }catch(err){
+        throw new Error(
+            err.message || "Something went wrong!"
+        )
+    }
+}
+
+export {otpVerificationService};
+
+===== ./frontend/src/services/verifyLoginService.js =====
+const verifyLoginService = async (email, password)=>{
+    const api = `${import.meta.env.VITE_API_BASE_URL}/login`;
+    try{
+        const response =  await fetch(api,{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                email:email,
+                password: password
+            })
+        });
+
+        const data = await response.json(); // this reads response body and converts JSON text into JavaScript object.
+        
+        console.log(data);
+        console.log(response);
+        if(!response.ok){
+            throw new Error(data.message || "Login failed" );
+        }
+        console.log(data.username);
+        return data;
+    }catch(err){
+        throw new Error(err.message || "Something went wrong");
+    }
+}
+
+export {verifyLoginService};
+
+===== ./frontend/src/services/authService.js =====
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
+
+export const sendOtp = async (email) => {
+    try{
+        const response = await fetch(
+            `${BASE_URL}/send-otp`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // this tells the backend: I am sending JSON data, Content-Type tells the backend server what type of data I am holding. Here it says that the body contains JSON data. 
+                    // The data can be json, XML, plain text, File data and backend parses differently.
+                },
+                body: JSON.stringify({email:email}), // JSON.stringify() converts normal JS object into a text, because http can only understand texts.
+            }
+        );
+        
+        const data = await response.json(); // converts response body into JS object
+        console.log(data.error);
+        if(!response.ok){
+            throw new Error(
+                data.message || data.error.email || "Failed to send OTP"
+            );
+        }
+        return data;
+        
+    }catch(err){
+        throw new Error(err.message || "Something went wrong");
+    }
+
+    
+};
+
+===== ./frontend/src/services/userSignupService.js =====
+const userRegister = async (email, username, password, confirmPassword)=>{
+    const api = `${import.meta.env.VITE_API_BASE_URL}/signup`;
+    try{
+        
+            const response = await fetch(api,{
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body :  JSON.stringify({
+                    email:email,
+                    username: username,
+                    password: password,
+                    confirmPassword: confirmPassword
+                })
+            })
+            const data = await response.json();
+            console.log(data.error);
+            if(!response.ok){
+                throw new Error(
+                    data.message || "Trouble in creating user account, please contact socialmedia.platform.team@gmail.com"
+                )
+            }
+            return data;
+        
+    }
+    catch(err){
+        throw new Error(
+            err.message || "Something went wrong"
+        )
+    }
+}
+
+export {userRegister};
+
+===== ./frontend/src/styles/Popup.css =====
+.popup{
+    position: fixed;
+    top: 20px;
+    right: 700px;
+
+    background-color: #222;
+    color: white;
+
+    padding: 14px 22px;
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+===== ./frontend/src/pages/SignupRelated/SignupSuccessPopup.jsx =====
+import { useNavigate } from "react-router-dom";
+function Popup({successMessage}){
+    const navigate = useNavigate();
+    return (
+        <div className="max-w-xl border mt-5 mx-auto shadow-lg rounded-lg">
+              <div className="flex flex-col items-center py-12 gap-4 text-center px-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_8px_24px_rgba(16,185,129,0.2)]">
+             <span className=" text-white"> ✓ </span>
+              </div>
+              <div>
+                <p className="font-black text-blue text-base">{successMessage}</p>
+                
+              </div>
+              <button 
+              className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" 
+              onClick={() => {
+                      navigate("/home");
+                    }}
+              >
+                Continue!
+              </button>
+            </div>
+            </div>
+    );
+}
+export { Popup };
+
+/*
+<!-- Success state -->
+            <div className="max-w-xl border mt-5 mx-auto shadow-lg rounded-lg">
+              <div className="flex flex-col items-center py-12 gap-4 text-center px-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_8px_24px_rgba(16,185,129,0.2)]">
+             <span className=" text-white"> ✓ </span>
+              </div>
+              <div>
+                <p className="font-black text-blue text-base">Email verification done!</p>
+                <p className="text-[13px] text-text mt-1 max-w-xs">
+                  Now you can continue with your signup.
+                </p>
+              </div>
+              <button className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" >
+                Continue!
+              </button>
+            </div>
+            </div>
+*/
+
+
+===== ./frontend/src/pages/SignupRelated/SignupPage.jsx =====
+import { useState } from "react"
+import SignupError from "./SignupError.jsx"
+import { Eye, EyeOff } from "lucide-react"
+import { userRegister } from "../../services/userSignupService.js";
+import { Popup } from "./SignupSuccessPopup.jsx"
+
+import { useSelector, useDispatch  } from "react-redux";
+import { setActiveUsername, setIsAuthenticated } from "../../features/auth/authSlice.js";
+
+function Signup(/*{ verifiedEmail, setActiveUsername }*/) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showErrorPopup, setShowErrorPopup] = useState(false);
+    const [message, setMessage] = useState(""); // for errors
+    const [successPopup, setSuccessPopup] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(""); // for success message
+    const [email, setEmail] = useState(verifiedEmail || "");
+
+    const dispatch = useDispatch();
+
+    const verifiedEmail = useSelector(
+        state => state.auth.verifiedEmail
+    );
+
+    const validateSignup = async (event) => {
+
+        event.preventDefault();
+
+        if (username.trim().length === 0 && (password.trim().length < 6 || password.trim().length > 25)) {
+            setMessage("Please provide valid username and password");
+            setShowErrorPopup(true);
+            return;
+        }
+
+        if (username.trim().length === 0) {
+            setMessage("Username can't be empty");
+            setShowErrorPopup(true);
+            return;
+        }
+        if (password !== confirmPassword) {
+            setMessage("Both passwords should match!");
+            setShowErrorPopup(true);
+            return;
+        }
+        if (password.trim().length < 6 || password.trim().length > 25) {
+            setMessage("Password length must be greater than or equal to 6 and less than or equal to 25");
+            setShowErrorPopup(true);
+            return;
+        }
+
+        try {
+            setMessage("");
+            const response = await userRegister(email, username, password, confirmPassword);
+            console.log(response.message);
+            setSuccessMessage(response.message);
+            // setActiveUsername(username)
+            dispatch(setActiveUsername(username));
+            dispatch(setIsAuthenticated(true));
+            setSuccessPopup(true);
+        } catch (error) {
+            console.log(error);
+            setMessage(error.message);
+        }
+
+
+    }
+    return (
+        <div>
+            <h1 className="text-center">Social Media Platform</h1> <br />
+            <h1 className="text-center">Signup Page</h1> <br />
+            <form onSubmit={validateSignup} className="flex flex-col gap-4 w-[300px] mx-auto">
+                <input
+                    type="email"
+                    value={email}
+                    className="border p-2"
+                    readOnly={!!verifiedEmail}
+                    placeholder={!verifiedEmail ? "Enter your email" : ""}
+                    onChange={(event)=>setEmail(event.target.value)}
+                />
+
+                <input
+                    type="text"
+                    // id="username"
+                    value={username}
+                    className="border p-2"
+                    placeholder="Enter username"
+                    onChange={(event) => {
+                        setUsername(event.target.value);
+                    }}
+                />
+                <div className="relative">
+                    <input
+
+                        // id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        placeholder="Enter password"
+                        className="border p-2 pr-10 w-full"
+                        onChange={(event) => {
+                            setPassword(event.target.value);
+                        }}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                        onClick={() => {
+                            setShowPassword(!showPassword);
+                        }}
+                    >
+                        {password.length !== 0 && (showPassword ? <EyeOff size={15} /> : <Eye size={15} />)}
+                    </button>
+                </div>
+
+                <div className="relative">
+                    <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        // id="confirmPassword"
+                        value={confirmPassword}
+                        className="border p-2 pr-10 w-full"
+                        placeholder="Re-Enter password for confirmation"
+                        onChange={(event) => {
+                            setConfirmPassword(event.target.value);
+                        }}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                        onClick={() => {
+                            setShowConfirmPassword(!showConfirmPassword);
+                        }}
+                    >
+                        {confirmPassword.length !== 0 && (showConfirmPassword ? <EyeOff size={15} /> : <Eye size={15} />)}
+                    </button>
+                </div>
+
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white p-2 rounded cursor-pointer"
+
+                >
+                    Signup
+                </button>
+            </form>
+            {
+                showErrorPopup &&
+                <SignupError errorMessage={message} setShowErrorPopup={setShowErrorPopup} />
+            }
+            {message && <p>{message}</p>}
+            {successPopup && <Popup successMessage={successMessage} username={username} />}
+        </div>
+    )
+}
+
+export { Signup };
+
+===== ./frontend/src/pages/SignupRelated/SignupError.jsx =====
+import { useState } from "react"
+export default function ErrorPopup({ errorMessage, setShowErrorPopup}) {
+    
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+
+            <div className="bg-white rounded-xl shadow-xl p-6 w-[400px]">
+
+                <div className="flex flex-col items-center gap-4">
+
+                    <div className="h-14 w-14 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-2xl">
+                        ✕
+                    </div>
+
+                    <h2 className="text-xl font-bold text-gray-800">
+                        Invalid!
+                    </h2>
+
+                    <p className="text-gray-600 text-center">
+                        {errorMessage}
+                    </p>
+
+                    <button
+                        type="button"
+                        className="bg-red-600 text-white px-5 py-2 rounded-lg w-full cursor-pointer"
+                        onClick={() => {
+                            setShowErrorPopup(false);
+                        }}
+                    >
+                        OK
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    )
+}
+
+===== ./frontend/src/pages/LoginRelated/LoginPage.jsx =====
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { verifyLoginService } from "../../services/verifyLoginService";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setActiveUsername } from "../../features/auth/authSlice";
+import { setIsAuthenticated } from "../../features/auth/authSlice";
+
+export const LoginPage = (/*{setActiveUsername, setCurrentPage}*/)=>{
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogin = async (event)=>{
+        event.preventDefault();
+        if(email.trim().length === 0 && password.trim().length === 0){
+            setMessage("Please provide email and password")
+            return;
+        }
+        if(email.trim().length === 0){
+            setMessage("Please provide a valid email");
+            return;
+        }
+
+        if(password.trim().length === 0){
+            setMessage("Please provide a valid password");
+            return;
+        }
+
+        if(password.length<6 || password.length>25){
+            setMessage("Password length must be betwee 6 and 25(both inclusive)");
+            return;
+        }
+
+        try{
+            setMessage("");
+            const response = await verifyLoginService(email, password);
+            // setActiveUsername(response.username);
+            dispatch(setActiveUsername(response.username));
+            dispatch(setIsAuthenticated(true));
+            navigate("/home");
+        }catch(error){
+            setMessage(error.message);
+        }
+    }
+
+    return (
+        <div>
+            <h1>Login Page</h1>
+            <br />
+            <form onSubmit={handleLogin}>
+                <input
+                    type="text"
+                    className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-[10px] focus:ring-brand focus:border-brand block px-3 py-2 shadow-xs placeholder:text-body w-[200px] inline-block mr-5" 
+                    value={email}
+                    placeholder="Enter your email"
+                    onChange={(event)=>{
+                        setEmail(event.target.value);
+                    }}
+                />
+                <br /> <br />
+                <div className="relative w-50">
+                    <input 
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        className="border p-2 pr-10 w-full rounded-[10px]"
+                        placeholder="Enter your password"
+                        onChange={(event)=>{
+                            setPassword(event.target.value);
+                        }}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
+                        onClick={() => {
+                            setShowPassword(!showPassword);
+                        }}
+                    >
+                        {password.length !== 0 && (showPassword ? <EyeOff size={15}/> : <Eye size={15}/>)}
+                    </button>
+                </div>
+                <br />
+                <button 
+                    type="submit"
+                    className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
+                >
+                        Login
+                </button>
+            </form>
+            {message && <p>{message}</p>}
+        </div>
+    )
+}
+
+
+===== ./frontend/src/pages/OtpRelated/SendOtpPage.jsx =====
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { sendOtp } from '../../services/authService';
+
+export function SendOtpPage() {
+
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleOtp = async (event) => {
+
+        event.preventDefault();
+        setLoading(true);
+        setMessage("");
+
+        try {
+
+            const response = await sendOtp(email);
+            setMessage(response.message);
+            navigate("/verify-otp", { state: { email } }); // --> Passing the email to the verify-otp page, replace: true
+
+        } catch (error) {
+            setMessage(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div style={{ color: "black" }}>
+            <h1 className="text-center">Social Media Platform</h1> <br />
+            <h1>Email:</h1>
+            <form onSubmit={handleOtp}>
+                <input
+                    type="email" 
+                    id="email" 
+                    className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand block px-3 py-2 shadow-xs placeholder:text-body w-[200px] inline-block mr-5" 
+                    placeholder="john.doe@company.com" 
+                    value={email}
+                    onChange={(event) => {
+                        setEmail(event.target.value);
+                        setMessage("");
+                    }}
+                    required
+                />
+                <button 
+                    type='submit'
+                    className = "text-heading bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-md text-sm px-4 py-2.5 text-center leading-5 cursor-pointer"
+                >
+                    {
+                        loading ? "Sending OTP..." : "Send Otp"
+                    }
+                </button>
+            </form>
+            {message && <p>{message}</p>}
+            <p>Already have an account?</p>
+            <p>Click below to login</p>
+            <button 
+                type="button"
+                className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
+                onClick={()=>navigate("/login")} >LOGIN</button>
+            <br />
+
+            <p>Already verified?</p>
+            <p>Click below to signup</p>
+            <button 
+                type="button"
+                className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300"
+                onClick={()=>navigate("/signup")} >SIGNUP</button>
+            <br />
+        </div>
+    )
+}
+
+
+
+
+
+===== ./frontend/src/pages/OtpRelated/VerifyOtpPage.jsx =====
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { otpVerificationService } from "../../services/otpVerificationService";
+import { Popup } from "../SuccessPopup";
+import { useDispatch } from "react-redux";
+import { setVerifiedEmail } from "../../features/auth/authSlice";
+
+export function VerifyOtpPage(/*{setVerifiedEmail}*/){
+
+    const location = useLocation(); 
+    const email = location.state?.email; // getting the email from 
+
+    if(!email) // used to prevent user from directly entering to the verify-otp page without proper email.
+    {
+        return <Navigate to="/send-otp" replace /> // replace means: Replace current history entry instead of adding new one
+        /*
+            Without replace
+                History stack:
+                    /send-otp
+                    /verify-otp
+            If redirected:
+                <Navigate to="/send-otp" />
+            then history becomes:
+                /send-otp
+                /verify-otp
+                /send-otp
+            Now browser back button goes to:
+                /verify-otp
+            again.
+
+            With replace: <Navigate to="/send-otp" replace /> React Router REPLACES current entry. 
+            History becomes:
+                /send-otp
+                /send-otp
+            (or effectively current page replaced)
+            Now back button won't return to invalid /verify-otp.
+        
+        */        
+    }
+
+    const [otp, setOtp] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");    
+    const [showPopup, setShowPopup] = useState(false);
+    const dispatch = useDispatch();
+    
+    // React/browser passes the event object automatically.
+    // It was passed here through the onSubmit attribute of the form tag below.
+    const otpVerificationResponse = async (event)=>{
+        event.preventDefault();
+        try{
+            setLoading(true);
+            const response = await otpVerificationService(otp, email);
+            // setVerifiedEmail(email)
+            dispatch(setVerifiedEmail(email));
+            setMessage(response.message);
+            setShowPopup(true);
+            // setTimeout(()=>setShowPopup(false),8000);
+        }catch(err){
+            setMessage(err.message);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    return (
+        <div>
+            <h2>Enter OTP for verification</h2>
+            <form onSubmit={otpVerificationResponse}>
+                    <input
+                    type="number"
+                    className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand block px-3 py-2 shadow-xs placeholder:text-body w-[200px] inline-block mr-5" 
+                    placeholder="Enter the OTP"
+                    value={otp}
+                    onChange={(event)=>{
+                        setOtp(event.target.value);
+                    }}
+                    required
+                />
+                <button type="submit"
+                className = "text-heading bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-md text-sm px-4 py-2.5 text-center leading-5 cursor-pointer"
+                >
+                    {
+                        loading ? "Verifying" : "Verify"
+                    }
+                </button>
+            </form>
+            {message && <p>{message}</p>}
+            {showPopup && <Popup message={message} />}
+        </div>
+    );
+}
+
+
+===== ./frontend/src/pages/Home.jsx =====
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+export function Home(/*{activeUsername}*/) {
+    const activeUsername = useSelector(
+        state => state.auth.activeUsername
+    );
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+
+        dispatch(logout());
+        navigate("/login");
+
+    }
+    return (
+        <div>
+            <h1>Welcome to the platform, {activeUsername}</h1>
+            <div>
+                <button className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-blue-700 hover:bg-gray-200 active:bg-gray-300" onClick={handleLogout}>Logout</button>
+            </div>
+        </div>
+    )
+}
+
+
+
+===== ./frontend/src/pages/SuccessPopup.jsx =====
+import { useNavigate } from "react-router-dom";
+function Popup({message, verifiedEmail}){
+    const navigate = useNavigate();
+    return (
+        <div className="max-w-xl border mt-5 mx-auto shadow-lg rounded-lg">
+              <div className="flex flex-col items-center py-12 gap-4 text-center px-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_8px_24px_rgba(16,185,129,0.2)]">
+             <span className=" text-white"> ✓ </span>
+              </div>
+              <div>
+                <p className="font-black text-blue text-base">{message}</p>
+              </div>
+              <button 
+              className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" 
+              onClick={() => navigate("/signup", { state : {verifiedEmail}})}> 
+                Continue!
+              </button>
+            </div>
+            </div>
+    );
+}
+export { Popup };
+
+/*
+<!-- Success state -->
+            <div className="max-w-xl border mt-5 mx-auto shadow-lg rounded-lg">
+              <div className="flex flex-col items-center py-12 gap-4 text-center px-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_8px_24px_rgba(16,185,129,0.2)]">
+             <span className=" text-white"> ✓ </span>
+              </div>
+              <div>
+                <p className="font-black text-blue text-base">Email verification done!</p>
+                <p className="text-[13px] text-text mt-1 max-w-xs">
+                  Now you can continue with your signup.
+                </p>
+              </div>
+              <button className="inline-flex items-center justify-center w-40 px-5 py-3.5 rounded-2xl text-xs md:text-sm font-medium uppercase tracking-widest text-white  cursor-pointer transition-all duration-300 ease-in-out border-0 outline-none bg-gradient-to-r from-[#3d7ebb] via-[#1e3a78] to-[#1e3a78] hover:bg-gradient-to-r hover:from-[#183062] hover:via-[#3d7ebb] hover:to-[#1e3a78] w-full px-6" >
+                Continue!
+              </button>
+            </div>
+            </div>
+*/
+
+
+===== ./frontend/src/main.jsx =====
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import './index.css'
+import App from './App.jsx'
+import { store } from './store/store.js'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </StrictMode>
+)
+
+
+===== ./frontend/src/App.jsx =====
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { SendOtpPage } from "./pages/OtpRelated/SendOtpPage.jsx"
+import { Signup } from "./pages/SignupRelated/SignupPage.jsx";
+import { VerifyOtpPage } from "./pages/OtpRelated/VerifyOtpPage.jsx";
+import { Home } from "./pages/Home.jsx"
+import { LoginPage } from "./pages/LoginRelated/LoginPage.jsx";
+import { Navigate } from "react-router-dom";
+import { ProtectedRoute } from "./routes/ProtectedRoute.jsx";
+import { PublicRoute } from "./routes/PublicRoute.jsx";
+
+function App() {
+
+  return (
+    <Routes>
+        <Route path="/" element={<Navigate to="send-otp" replace/>}/>
+        <Route path="/send-otp" element={<SendOtpPage />}/>
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
+        <Route path="/signup" element={<PublicRoute> <Signup /> </PublicRoute>}/>
+        <Route path="/login" element={<PublicRoute> <LoginPage /> </PublicRoute>}/>
+        <Route path="/home" element={<ProtectedRoute> <Home /> </ProtectedRoute>}/>
+    </Routes>
+  );
+}
+
+export default App;
+
+===== ./frontend/src/store/store.js =====
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '../features/auth/authSlice';
+
+export const store = configureStore({
+    reducer: {
+        auth: authReducer
+    }
+});
+
+
+===== ./frontend/.env =====
+VITE_API_BASE_URL=http://localhost:8080/api/auth
+
+===== ./frontend/vite.config.js =====
+import { defineConfig } from 'vite'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+import tailwindcss from "@tailwindcss/vite"
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    babel({ presets: [reactCompilerPreset()] }),
+    tailwindcss()
+  ],
+})
+
+
+===== ./frontend/public/icons.svg =====
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="bluesky-icon" viewBox="0 0 16 17">
+    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
+    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
+  </symbol>
+  <symbol id="discord-icon" viewBox="0 0 20 19">
+    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
+  </symbol>
+  <symbol id="documentation-icon" viewBox="0 0 21 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
+  </symbol>
+  <symbol id="github-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="social-icon" viewBox="0 0 20 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
+  </symbol>
+  <symbol id="x-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+
+
+===== ./frontend/public/favicon.svg =====
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="46" fill="none" viewBox="0 0 48 46"><path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z" style="fill:#863bff;fill:color(display-p3 .5252 .23 1);fill-opacity:1"/><mask id="a" width="48" height="46" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M25.842 44.938c-.664.844-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.183c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.498 0-3.579-1.842-3.579H1.133c-.92 0-1.456-1.04-.92-1.787L9.91.473c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.578 1.842 3.578h11.377c.943 0 1.473 1.088.89 1.832L25.843 44.94z" style="fill:#000;fill-opacity:1"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#ede6ff" rx="5.508" ry="14.704" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -4.47 31.516)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#ede6ff" rx="10.399" ry="29.851" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -39.328 7.883)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#7e14ff" rx="5.508" ry="30.487" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -25.913 -14.639)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -32.644 -3.334)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -34.34 30.47)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#ede6ff" rx="14.072" ry="22.078" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="rotate(93.35 24.506 48.493)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx=".387" cy="8.972" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(39.51 .387 8.972)"/></g><g filter="url(#k)"><ellipse cx="47.523" cy="-6.092" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 47.523 -6.092)"/></g><g filter="url(#l)"><ellipse cx="41.412" cy="6.333" fill="#47bfff" rx="5.971" ry="9.665" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 41.412 6.333)"/></g><g filter="url(#m)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#n)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#o)"><ellipse cx="35.651" cy="29.907" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 35.651 29.907)"/></g><g filter="url(#p)"><ellipse cx="38.418" cy="32.4" fill="#47bfff" rx="5.971" ry="15.297" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 38.418 32.4)"/></g></g><defs><filter id="b" width="60.045" height="41.654" x="-19.77" y="16.149" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-54.613" y="-7.533" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-49.64" y="2.03" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-45.045" y="20.029" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-43.513" y="21.178" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="15.756" y="-17.901" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-27.636" y="-22.853" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="20.116" y="-38.415" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="24.641" y="-11.323" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="8.244" y="-2.416" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="18.713" y="10.588" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter></defs></svg>
+
+===== ./frontend/.gitignore =====
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.env
+.env.local
+.env.production
+
+===== ./frontend/index.html =====
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+
+===== ./frontend/eslint.config.js =====
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+])
+
+
+===== ./backend/README.md =====
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/service/SignupService.java =====
+package com.socialMedia.platform.service;
+
+import com.socialMedia.platform.config.PasswordConfig;
+import com.socialMedia.platform.exception.*;
+import com.socialMedia.platform.model.OtpVerification;
+import com.socialMedia.platform.model.User;
+import com.socialMedia.platform.repository.OtpVerificationRepository;
+import com.socialMedia.platform.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.regex.Pattern;
+
+@Service
+public class SignupService {
+
+    private final UserRepository userRepository;
+    private final OtpVerificationRepository otpRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+    public SignupService(UserRepository userRepository, OtpVerificationRepository otpRepository, BCryptPasswordEncoder passwordEncoder){
+        this.userRepository = userRepository;
+        this.otpRepository = otpRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[A-Za-z0-9!@#$%^&*()_+=<>?/.,;:'\"\\\\|{}\\[\\]-]{6,}$");
+
+    public String createUser(String email, String username, String password, String confirmPassword){
+
+        Optional<OtpVerification> emailInDb = otpRepository.findByEmail(email);
+        if(!emailInDb.isPresent()){
+            throw new EmailNotFoundException("Email not found, please register and verify your email!");
+        }
+
+        OtpVerification emailExists = emailInDb.get();
+        if(!emailExists.isVerified()){
+            throw new EmailNotVerifiedException("Email is not verified, please verify the Email!");
+        }
+
+        Optional<User> existingUser = userRepository.findByUserEmail(email);
+        if(existingUser.isPresent()){
+            throw new UserAlreadyExistsException("User already exists with that email ID, please do login.");
+        }
+
+        if(userRepository.existsByUserName(username)){
+            throw new UserNameAlreadyExistsException("Username already taken, please enter a unique username.");
+        }
+
+        if(password.length()<6 || password.length()>25){
+            throw new InvalidPasswordLengthException("Password length must be greater than or equal to 6 and less than or equal to 25");
+        }
+
+        if(!PASSWORD_PATTERN.matcher(password).matches()){
+            throw new InvalidPasswordException("Password should only contain A-Z, a-z, 0-9 and special characters");
+        }
+
+        if(!password.equals(confirmPassword)){
+            throw new PasswordMisMatchException("Password and confirm password doesn't match, please enter both correctly.");
+        }
+
+        // password regex
+        if(username.trim().length() == 0){
+
+        }
+
+
+        User user = new User();
+
+        user.setUserName(username);
+        user.setUserEmail(email);
+        user.setUserPassword(passwordEncoder.encode(password));
+
+        user.setUserFollowersCount(0L);
+        user.setUserFriendsCount(0L);
+
+        user.setUserProfilePhotoUrl(null);
+        user.setUserDescription(null);
+        user.setUserSummary(null);
+
+        user.setUserCreatedAt(LocalDateTime.now());
+
+        user.setUserPostsCount(0L);
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+
+        return "Successfully registered your account, you can start explore!";
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/service/LoginService.java =====
+package com.socialMedia.platform.service;
+
+import com.socialMedia.platform.exception.InvalidPasswordException;
+import com.socialMedia.platform.exception.UserNotFoundException;
+import com.socialMedia.platform.model.User;
+import com.socialMedia.platform.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+@Service
+public class LoginService {
+    private final UserRepository userRepo;
+    private final BCryptPasswordEncoder passwordEncoder;
+    public LoginService(UserRepository userRepo, BCryptPasswordEncoder passwordEncoder){
+        this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public String handleLogin(String email, String password){
+        User user = userRepo.findByUserEmail(email).orElseThrow(()->{
+            return new UserNotFoundException("User doesn't found with that email id");
+        });
+
+        if(!(passwordEncoder.matches(password, user.getUserPassword()))){
+            throw new InvalidPasswordException("Please enter the correct password");
+        }
+
+        user.setLastLogin(LocalDateTime.now());
+        return user.getUserName();
+    }
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/service/EmailService.java =====
+package com.socialMedia.platform.service;
+
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmailService {
+    private final JavaMailSender mailSender;
+    public EmailService(JavaMailSender mailSender){
+        this.mailSender = mailSender;
+    }
+
+    public void sendOtpEmail(String toEmail, String otp){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject("Social Media Platform - Email verification OTP");
+        message.setText(
+                "Your OTP for the Social Media Platform Verification is "+otp+"\n\n This OTP will expire in three minutes"
+        );
+        mailSender.send(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/service/OtpService.java =====
+package com.socialMedia.platform.service;
+
+import com.socialMedia.platform.exception.*;
+import com.socialMedia.platform.model.OtpVerification;
+import com.socialMedia.platform.model.User;
+import com.socialMedia.platform.repository.OtpVerificationRepository;
+import com.socialMedia.platform.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.Random;
+
+@Service
+public class OtpService {
+    private final OtpVerificationRepository otpRepository;
+    private final EmailService emailService;
+    private final UserRepository userRepository;
+    // constructor injection
+    public OtpService(OtpVerificationRepository otpRepository, EmailService emailService, UserRepository userRepository){
+        this.otpRepository = otpRepository;
+        this.emailService = emailService;
+        this.userRepository = userRepository;
+    }
+
+    public String generateOtp(){
+        Random random = new Random();
+        int otpNumber = 100000 + random.nextInt(900000);
+        // nextInt(bound) - generates numbers randomly from 0(inclusive) to 900000(exclusive), so the numbers generated in between 0 to 899999
+        // adding 100000 will make it purely 6 digit, if 1 is generated then 100000 + 1 = 100001 which makes it as a full 6 digit number
+
+        return String.valueOf(otpNumber); // converts the otpNumber from int to String
+    }
+
+    public OtpVerification createOrUpdateOtp(String email){
+
+        Optional<User> emailExists = userRepository.findByUserEmail(email);
+        if(emailExists.isPresent()){
+            throw new UserAlreadyExistsException("User with this email already exists, please use a new email!");
+        }
+
+        String generatedOtp = generateOtp();
+
+        Optional<OtpVerification> existingOtp = otpRepository.findByEmail(email);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        if(existingOtp.isPresent()){
+
+            OtpVerification otpVerification = existingOtp.get();
+
+            if(otpVerification.isVerified()){
+                throw new EmailAlreadyVerifiedException("Entered email is already verified!");
+            }
+
+            if(otpVerification.getBlockedUntil() != null && now.isBefore(otpVerification.getBlockedUntil())){
+                throw new TooManyOtpRequestsException("Too many Requests, please try again after a while");
+            }
+
+            if(otpVerification.getBlockedUntil() != null && now.isAfter(otpVerification.getBlockedUntil())){
+
+                otpVerification.setOtp(generatedOtp);
+                otpVerification.setExpiryTime(now.plusMinutes(3));
+                otpVerification.setResendCount(0);
+                otpVerification.setVerified(false);
+                otpVerification.setBlockedUntil(null);
+                OtpVerification savedOtp = otpRepository.save(otpVerification);
+                emailService.sendOtpEmail(
+                        email,
+                        generatedOtp
+                );
+                return savedOtp;
+            }
+
+            if(otpVerification.getResendCount() >= 3){
+
+                otpVerification.setBlockedUntil(
+                        now.plusHours(1)
+                );
+                otpRepository.save(otpVerification);
+                throw new TooManyOtpRequestsException("OTP limit reached");
+            }
+
+            otpVerification.setOtp(generatedOtp);
+            otpVerification.setResendCount(
+                    otpVerification.getResendCount()+1
+            );
+            otpVerification.setExpiryTime(now.plusMinutes(3));
+            otpVerification.setVerified(false);
+
+            OtpVerification savedOtp = otpRepository.save(otpVerification);
+            emailService.sendOtpEmail(
+                    email,
+                    generatedOtp
+            );
+            return savedOtp;
+
+        }
+
+        OtpVerification newOtp = new OtpVerification(
+                email,
+                generatedOtp,
+                now.plusMinutes(3),
+                0,
+                false
+        );
+
+        newOtp.setBlockedUntil(null);
+        OtpVerification savedOtp = otpRepository.save(newOtp);
+        emailService.sendOtpEmail(
+                email,
+                generatedOtp
+        );
+        return savedOtp;
+    }
+
+    public String verifyOtp(String email, String otp){
+
+        Optional<OtpVerification> existingOtp = otpRepository.findByEmail(email);
+
+        if(existingOtp.isEmpty()){
+            throw new EmailNotFoundException("Email not found!");
+        }
+
+        OtpVerification otpVerification = existingOtp.get();
+
+        if(otpVerification.isVerified()){
+            throw new EmailAlreadyVerifiedException("Email already verified");
+        }
+
+        if(LocalDateTime.now().isAfter(otpVerification.getExpiryTime())){
+            throw new OtpExpirationException("OTP session expired, try generating a new OTP");
+        }
+
+        if(!otpVerification.getOtp().equals(otp)){
+            throw new InvalidOtpException("Invalid OTP, please enter the correct OTP");
+        }
+
+        otpVerification.setVerified(true);
+        otpRepository.save(otpVerification);
+        return "Email verification done!";
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/controller/TestController.java =====
+package com.socialMedia.platform.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TestController {
+
+    @GetMapping("/")
+    public String getGreet(){
+        return "Hello, welcome to our application";
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/controller/AuthController.java =====
+package com.socialMedia.platform.controller;
+
+
+import com.socialMedia.platform.dto.LoginDto;
+import com.socialMedia.platform.dto.SendOtpReqDto;
+import com.socialMedia.platform.dto.SignupReqDto;
+import com.socialMedia.platform.dto.VerifyOtpReqDto;
+import com.socialMedia.platform.service.LoginService;
+import com.socialMedia.platform.service.OtpService;
+import com.socialMedia.platform.service.SignupService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final OtpService otpService;
+    private final SignupService signupService;
+    private final LoginService loginService;
+    public AuthController(OtpService otpService, SignupService signupService, LoginService loginService){
+        this.otpService = otpService;
+        this.signupService = signupService;
+        this.loginService = loginService;
+    }
+
+    @PostMapping("/send-otp")
+    public ResponseEntity<Map<String,String>> sendOtp(@Valid @RequestBody SendOtpReqDto request){
+        otpService.createOrUpdateOtp(request.getEmail());
+        Map<String,String> hm = new HashMap<>();
+        hm.put("message","OTP sent successfully");
+        return ResponseEntity.ok(hm);
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<Map<String, String>> verifyOtp(@Valid @RequestBody VerifyOtpReqDto request){
+        String response = otpService.verifyOtp(request.getEmail(), request.getOtp());
+        Map<String, String> hm = new HashMap<>();
+        hm.put("message",response);
+        return ResponseEntity.ok(hm);
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<Map<String,Object>> signup(@Valid @RequestBody SignupReqDto request){
+        String message = signupService.createUser(request.getEmail(), request.getUsername(),request.getPassword(), request.getConfirmPassword());
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("message", message);
+        response.put("status code", HttpStatus.OK.value());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginDto request){
+        String userName = loginService.handleLogin(request.getEmail(), request.getPassword());
+        String message = "Login Successfull";
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("message", message);
+        response.put("username", userName);
+        response.put("status code", HttpStatus.OK.value());
+        System.out.println(ResponseEntity.ok(response));
+        return ResponseEntity.ok(response);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/Followers.java =====
+package com.socialMedia.platform.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+
+@Document(collection = "Followers")
+public class Followers {
+    @Id
+    private Long followId;
+    private Long followerUserId;
+    private Long followingUserId;
+    private String followRequestStatus;
+    private Boolean isFollower;
+    private LocalDateTime followRequestTimestamp;
+    private LocalDateTime followAcceptTimestamp;
+    private LocalDateTime followRemoveTimestamp;
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/OtpVerification.java =====
+package com.socialMedia.platform.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+
+@Document(collection = "otp_verifications") // creates a collection with name otp_verifications in mongo db
+public class OtpVerification {
+
+    @Id
+    private String id;
+
+    private String email;
+
+    private String otp;
+
+    private LocalDateTime expiryTime;
+
+    private int resendCount;
+
+    private boolean verified;
+
+    private LocalDateTime blockedUntil;
+
+    public OtpVerification(String email, String otp, LocalDateTime expiryTime, int resendCount, boolean verified) {
+        this.email = email;
+        this.otp = otp;
+        this.expiryTime = expiryTime;
+        this.resendCount = resendCount;
+        this.verified = verified;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public LocalDateTime getExpiryTime() {
+        return expiryTime;
+    }
+
+    public int getResendCount() {
+        return resendCount;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public void setExpiryTime(LocalDateTime expiryTime) {
+        this.expiryTime = expiryTime;
+    }
+
+    public void setResendCount(int resendCount) {
+        this.resendCount = resendCount;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public LocalDateTime getBlockedUntil() {
+        return blockedUntil;
+    }
+
+    public void setBlockedUntil(LocalDateTime blockedUntil) {
+        this.blockedUntil = blockedUntil;
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/Friends.java =====
+package com.socialMedia.platform.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Friends")
+public class Friends {
+
+    @Id
+    private Long friendsId;
+    private Long requestUserId;
+    private Long receiverUserId;
+    private String requestStatus;
+    private Boolean isFriends;
+    private Long endedByUserId;
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/User.java =====
+package com.socialMedia.platform.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "Users")
+public class User {
+
+    @Id
+    private String userId;
+
+    @Indexed(unique = true)
+    private String userName;
+
+    @Indexed(unique = true)
+    private String userEmail;
+
+    private String userPassword;
+    private Long userFollowersCount;
+    private Long userFriendsCount;
+    private String userProfilePhotoUrl;
+    private String userDescription;
+    private String userSummary;
+
+    private LocalDateTime userCreatedAt;
+
+    private Long userPostsCount;
+
+    private LocalDateTime lastLogin;
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/Dummy.java =====
+package com.socialMedia.platform.model;
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "dummy")
+public class Dummy {
+
+    @Id
+    private String id;
+    private String name;
+
+    public Dummy(){}
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Dummy(String name) {
+//        this.id = id;
+        this.name = name;
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/model/LoginAttempts.java =====
+package com.socialMedia.platform.model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "LastAttempts")
+public class LoginAttempts {
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/PlatformApplication.java =====
+package com.socialMedia.platform;
+
+import com.socialMedia.platform.model.Dummy;
+import com.socialMedia.platform.repository.DummyRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication //(exclude = {DataSourceAutoConfiguration.class}) // prevents SpringBoot from auto configuring with the SQL db, which prevents the application from running.
+// @SpringBootApplication is a combination of three annotations, @SpringBootConfiguration, @EnableAutoConfiguration and @ComponentScan
+public class PlatformApplication {
+
+	public static void main(String[] args) {
+
+		SpringApplication.run(PlatformApplication.class, args);
+	}
+
+	@Bean
+	CommandLineRunner runner(DummyRepository dummyRepo){
+		return args -> dummyRepo.save(new Dummy("First user"));
+	}
+
+	/*
+		Spring Boot starts and performs component scanning and configuration processing.
+		It detects the @Bean method and invokes it, injecting required dependencies like DummyRepository.
+		The returned object (a CommandLineRunner lambda) is registered as a bean.
+		After the application context is fully initialized, Spring Boot retrieves all CommandLineRunner beans and executes their run() methods.
+	 */
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/InvalidPasswordLengthException.java =====
+package com.socialMedia.platform.exception;
+
+public class InvalidPasswordLengthException extends RuntimeException {
+    public InvalidPasswordLengthException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/UserNameAlreadyExistsException.java =====
+package com.socialMedia.platform.exception;
+
+public class UserNameAlreadyExistsException extends RuntimeException{
+    public UserNameAlreadyExistsException(String message){super(message);}
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/EmailNotFoundException.java =====
+package com.socialMedia.platform.exception;
+
+public class EmailNotFoundException extends RuntimeException{
+    public EmailNotFoundException(String message){
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/EmailNotVerifiedException.java =====
+package com.socialMedia.platform.exception;
+
+public class EmailNotVerifiedException extends RuntimeException {
+    public EmailNotVerifiedException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/InvalidOtpException.java =====
+package com.socialMedia.platform.exception;
+
+public class InvalidOtpException extends RuntimeException{
+    public InvalidOtpException(String message){
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/PasswordMisMatchException.java =====
+package com.socialMedia.platform.exception;
+
+public class PasswordMisMatchException extends RuntimeException {
+    public PasswordMisMatchException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/UserAlreadyExistsException.java =====
+package com.socialMedia.platform.exception;
+
+public class UserAlreadyExistsException extends RuntimeException {
+    public UserAlreadyExistsException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/GlobalExceptionHandler.java =====
+package com.socialMedia.platform.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidOtpException(InvalidOtpException exception){
+        Map<String, Object> errorResponse = new LinkedHashMap<>();
+        errorResponse.put("timestamp", LocalDateTime.now());
+        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        errorResponse.put("message", exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OtpExpirationException.class)
+    public ResponseEntity<Map<String,Object>> handleOtpSessionExpiration(OtpExpirationException exception){
+        Map<String, Object> responseEntity = new LinkedHashMap<>();
+        responseEntity.put("timestamp",LocalDateTime.now());
+        responseEntity.put("status",HttpStatus.BAD_REQUEST.value());
+        responseEntity.put("message", exception.getMessage());
+        return new ResponseEntity<>(responseEntity,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmailNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailNotFoundException(EmailNotFoundException exception){
+        Map<String, Object> responseEntity = new LinkedHashMap<>();
+        responseEntity.put("timestamp", LocalDateTime.now());
+        responseEntity.put("status", HttpStatus.NOT_FOUND.value());
+        responseEntity.put("message", exception.getMessage());
+        return new ResponseEntity<>(responseEntity, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EmailAlreadyVerifiedException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailAlreadyVerifiedException(EmailAlreadyVerifiedException exception){
+        Map<String, Object> responseEntity = new LinkedHashMap<>();
+        responseEntity.put("timestamp", LocalDateTime.now());
+        responseEntity.put("status", HttpStatus.CONFLICT.value());
+        responseEntity.put("message", exception.getMessage());
+        return new ResponseEntity<>(responseEntity, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(TooManyOtpRequestsException.class)
+    public ResponseEntity<Map<String, Object>> handleTooManyRequestException(TooManyOtpRequestsException exception){
+        Map<String, Object> responseEntity = new LinkedHashMap<>();
+        responseEntity.put("timestamp", LocalDateTime.now());
+        responseEntity.put("status", HttpStatus.TOO_MANY_REQUESTS.value());
+        responseEntity.put("message", exception.getMessage());
+        return new ResponseEntity<>(responseEntity, HttpStatus.TOO_MANY_REQUESTS);
+    }
+
+    @ExceptionHandler(EmailNotVerifiedException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailNotVerifiedException(EmailNotVerifiedException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.FORBIDDEN.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleUserAlreadyExistsException(UserAlreadyExistsException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.CONFLICT.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserNameAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNameAlreadyExistsException(UserNameAlreadyExistsException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.CONFLICT.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(PasswordMisMatchException.class)
+    public ResponseEntity<Map<String, Object>> handlePasswordDoesntMatchException(PasswordMisMatchException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.FORBIDDEN.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(InvalidPasswordLengthException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidPasswordLengthException(InvalidPasswordLengthException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.FORBIDDEN.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<Map<String, Object>> handlePasswordRegexMismatchException(InvalidPasswordException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("Timestamp",LocalDateTime.now());
+        hm.put("Status",HttpStatus.FORBIDDEN.value());
+        hm.put("message",exception.getMessage());
+        return new ResponseEntity<>(hm,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception){
+        Map<String, Object> hm = new LinkedHashMap<>();
+        hm.put("timestamp",LocalDateTime.now());
+        hm.put("status",HttpStatus.FORBIDDEN.value());
+        Map<String, String> errors = new HashMap<>();
+
+        exception.getBindingResult().getFieldErrors().forEach(error->{
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+        // .getBindingResult() returns a BindingResult object, it is like a container and that holds all the validation errors.
+        System.out.println("Starting1: "+exception.getBindingResult());
+        System.out.println("Starting2: "+exception.getBindingResult().getFieldErrors());
+        // .getFieldErrors() returns a List<FieldError> and that list was attached with a .forEach() method in which we get the errors one by one and we put that into the errors hashmap.
+        hm.put("error",errors);
+        return new ResponseEntity(hm,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException exception){
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("Timestamp",LocalDateTime.now());
+        response.put("status",HttpStatus.NOT_FOUND.value());
+        response.put("message",exception.getMessage());
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    }
+}
+
+/*
+Question:
+Why not directly write the methods inside the Exception class?
+Answer:
+        public class UserNotFoundException extends RuntimeException {
+            public ResponseEntity<String> handle() {
+                return ...
+            }
+        }
+    This is technically possible.
+    BUT it violates good design principles.
+    Because Exception class should only represent the ERROR
+        Its job is:
+            throw new UserNotFoundException("User not found");
+            That’s all.
+        An exception object should contain:
+            error info
+            message
+            maybe extra metadata
+        NOT:
+            HTTP response logic
+            controller logic
+            API formatting
+Seperation of concerns:
+    Very important backend principle.
+    | Class           | Responsibility  |
+    | --------------- | --------------- |
+    | Exception class | Represent error |
+    | Handler class   | Decide response |
+    | Controller      | Handle request  |
+    | Service         | Business logic  |
+Each class should have ONE responsibility.
+    This is from:
+        SOLID principles
+        especially Single Responsibility Principle (SRP)
+
+*/
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/EmailAlreadyVerifiedException.java =====
+package com.socialMedia.platform.exception;
+
+public class EmailAlreadyVerifiedException extends RuntimeException{
+    public EmailAlreadyVerifiedException(String message){
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/UserNotFoundException.java =====
+package com.socialMedia.platform.exception;
+
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/OtpExpirationException.java =====
+package com.socialMedia.platform.exception;
+
+public class OtpExpirationException extends RuntimeException {
+    public OtpExpirationException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/TooManyOtpRequestsException.java =====
+package com.socialMedia.platform.exception;
+
+public class TooManyOtpRequestsException extends RuntimeException{
+    public TooManyOtpRequestsException(String message){
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/exception/InvalidPasswordException.java =====
+package com.socialMedia.platform.exception;
+
+public class InvalidPasswordException extends RuntimeException {
+    public InvalidPasswordException(String message) {
+        super(message);
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/repository/DummyRepository.java =====
+package com.socialMedia.platform.repository;
+
+
+import com.socialMedia.platform.model.Dummy;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface DummyRepository extends MongoRepository<Dummy, String> {
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/repository/OtpVerificationRepository.java =====
+package com.socialMedia.platform.repository;
+
+import com.socialMedia.platform.model.OtpVerification;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.Optional;
+
+public interface OtpVerificationRepository extends MongoRepository<OtpVerification, String> {
+    //
+    Optional<OtpVerification> findByEmail(String email);
+}
+/*
+
+SpringBoot creates a class while running the application which implements the OtpVerificationRepository and it implements all the methods specified in MongoRepository.
+But, How does methods like findByEmail() work because we specified them?
+This is powered by:
+    Query Method Parsing / Method Name Derivation
+    Spring reads method names and converts them into MongoDB queries.
+    it breaks it into parts:
+    | Part     | Meaning         |
+    | -------- | --------------- |
+    | `findBy` | query operation |
+    | `Email`  | field name      |
+
+For Spring to automatically generate the query,
+the method name must follow Spring Data’s recognized naming patterns/syntax.
+For example:
+    findByEmail(String email)
+Spring interprets it as:
+    findBy + email
+and generates query logic.
+
+Valid Examples
+    Suppose this document exists:
+        public class User {
+            private String name;
+            private int age;
+            private String email;
+        }
+    Then these are valid:
+        findByName(String name)
+        findByAge(int age)
+        findByEmail(String email)
+        findByNameAndAge(String name, int age)
+        findByAgeGreaterThan(int age)
+        findByNameContaining(String text)
+    because Spring understands keywords like:
+        findBy
+        And
+        Or
+        GreaterThan
+        Containing
+        etc.
+
+What if method name is invalid?
+    Example:
+        findSomethingByMagic(String x)
+        Spring may fail during application startup.
+        You’ll get exceptions like:
+            No property 'magic' found for type User
+        or:
+            Failed to create query for method
+        because Spring cannot understand the method name.
+
+Method Name
+        ↓
+Spring Parser
+        ↓
+Generated MongoDB Query
+        ↓
+Execution
+
+*/
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/repository/UserRepository.java =====
+package com.socialMedia.platform.repository;
+
+import com.socialMedia.platform.model.OtpVerification;
+import com.socialMedia.platform.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends MongoRepository<User, Long> {
+    Optional<User> findByUserEmail(String email);
+    Optional<User> findByUserName(String username);
+    boolean existsByUserName(String username);
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/config/PasswordConfig.java =====
+package com.socialMedia.platform.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+@Configuration
+public class PasswordConfig {
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/config/CorsConfig.java =====
+package com.socialMedia.platform.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class CorsConfig {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
+            }
+        };
+    }
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/dto/VerifyOtpReqDto.java =====
+package com.socialMedia.platform.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public class VerifyOtpReqDto {
+
+    @Email(message="Invalid email")
+    @NotBlank(message="Email is required")
+    // @NotBlank prevents:
+    //          null
+    //          empty string ""
+    //          only spaces " "
+    String email;
+
+    @NotBlank(message="OTP is required")
+    String otp;
+
+    public VerifyOtpReqDto() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public VerifyOtpReqDto(String email, String otp) {
+        this.email = email;
+        this.otp = otp;
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/dto/LoginDto.java =====
+package com.socialMedia.platform.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginDto {
+    @Email
+    @NotBlank
+    private String email;
+    @NotBlank
+    private String password;
+
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/dto/SendOtpReqDto.java =====
+package com.socialMedia.platform.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public class SendOtpReqDto {
+
+    @Email(message="Invalid email") // If the email is not valid then this message will be displayed.
+    @NotBlank(message = "Email is required")
+    private String email;
+
+    public SendOtpReqDto() {
+    }
+
+    public SendOtpReqDto(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+
+===== ./backend/src/main/java/com/socialMedia/platform/dto/SignupReqDto.java =====
+package com.socialMedia.platform.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class SignupReqDto {
+
+    @Email(message="Invalid email")
+    @NotBlank(message = "Email is required")
+    private String email;
+    @NotBlank(message="Password can't be blank")
+    private String password;
+    @NotBlank(message="Password can't be blank")
+    private String confirmPassword;
+    @NotBlank(message = "Username can't be blank")
+    private String username;
+}
+
+
+===== ./backend/src/main/resources/application.properties =====
+spring.application.name=platform
+spring.mongodb.uri=mongodb://localhost:27017/social-media
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=socialmedia.platform.team@gmail.com
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+
+
+===== ./backend/src/test/java/com/socialMedia/platform/PlatformApplicationTests.java =====
+package com.socialMedia.platform;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class PlatformApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+
+===== ./.gitignore =====
+# Spring Boot / Java
+backend/target/
+*.log
+*.class
+
+# OS, the below is MAC OS related
+.DS_Store
+
+#IDE related settings will be in .idea and .vscode folders respectively, they can be ignored.
+.idea/
+.vscode/
+
+#Node
+node_modules/
+
+
+.env
+.env.local
+.env.production
+
+===== ./project_dump.txt =====

@@ -53,6 +53,7 @@ Update2:
     Why here and not inside App.jsx?
         BrowserRouter needs to wrap everything that will ever use routing — including App.jsx itself. If you put it inside App.jsx, it wraps only its children, not itself. Putting it in main.jsx means the entire app is inside the router context from the very top.
 
+    After adding the routers, now user can move front and back in browsers.
 
 
 

@@ -1,0 +1,53 @@
+Installing redux toolkit:
+    npm install @reduxjs/toolkit react-redux
+
+    The redux is mainly used for the global state management in react js. 
+    When we are building frontend of projects we have the situations where we pass the data from one component to the other as props.
+    But when the project grows and the frontend becomes huge, then that approach of passing the data using props will not be ideal. The datas will become messy for managing.
+    Some example of those problems:
+            many pages need same data
+            login info needed everywhere
+            JWT token needed everywhere
+            user profile needed everywhere
+        Passing data through props becomes messy.
+    And redux was introduced to solve that problem. Redux solves this by creating one central place to store shared app data.
+    In our project, we have not directly used redux. Instead we have used redux toolkit. Using redux like traditionally had a huge setup but redux toolkit helps us to reduce that.
+    The command to install redux toolkit is: npm install @reduxjs/toolkit react-redux
+    After installing it we want to store the necessary data in a central store in redux called "Store".
+    And from that we can access and manage every data.
+
+Setup procedure for redux toolkit:
+        Install the redux toolkit command using: npm install @reduxjs/toolkit react-redux
+
+        Creating the folder:
+            src/
+                store/
+                    store.js
+                features/
+                        auth/
+                            authSlice.js
+        Create the above folders and respective files in it.
+        Before writing the configuration codes in those files(store.js, authSlice.js), we want to know some prerequisites about the redux's centralized management of data.
+        Previously, we know that redux manages the app data in centralized place and that place is called store.
+        So, store is the central container that holds app wide data.
+        And the store itself has seperated into multiple parts called slices.
+        And those slices might be for authentication, post or anyother things.
+        So in the authSlice.js we paste the code for slices used for every particular job. 
+        And the createSlice() is used for creating a slice for specific use case and in that function we want to pass the details like:
+            i)   name of the slice(name: "auth").
+            ii)  initialState(which contains the initial state of the variables in the slices)
+            iii) And then the reducers, the reducers are the ones in which we pass the fields which we have to use globally.
+                    For example setVerifiedEmail, setActiveUsername, setIsAuthenticated.
+                    And for every field, we write a reducer function in which we include the state and action as parameters. 
+                    The i)  state: Refers to the value of the field in the store. The data is state. Note: state is also giant JS object.
+                                Eg: Suppose the field currently has verifiedEmail: null, then later after OTP, it becomes verifiedEmail: "abc@gmail.com". The it is said that the state is changed.
+                        ii) action: Refers to the 
+            
+
+
+
+
+
+
+
+

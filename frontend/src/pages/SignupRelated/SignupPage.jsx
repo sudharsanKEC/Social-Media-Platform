@@ -17,13 +17,15 @@ function Signup(/*{ verifiedEmail, setActiveUsername }*/) {
     const [message, setMessage] = useState(""); // for errors
     const [successPopup, setSuccessPopup] = useState(false);
     const [successMessage, setSuccessMessage] = useState(""); // for success message
-    const [email, setEmail] = useState(verifiedEmail || "");
-
+    
     const dispatch = useDispatch();
 
     const verifiedEmail = useSelector(
         state => state.auth.verifiedEmail
     );
+
+    const [email, setEmail] = useState(verifiedEmail || "");
+
 
     const validateSignup = async (event) => {
 

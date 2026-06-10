@@ -1,6 +1,7 @@
 const otpVerificationService = async (otp, email)=>{
 
     const url = `${import.meta.env.VITE_API_BASE_URL}/verify-otp`;
+    console.log(import.meta.env.VITE_API_BASE_UR);
     try{
         const response = await fetch(url, {
             method: "POST",

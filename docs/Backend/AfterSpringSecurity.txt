@@ -1,0 +1,38 @@
+After step1(adding the spring security dependency), all the incoming requests to the backend will be blocked and the 401 Unauthorized request will be returned.
+Because:
+    Before adding the dependency
+    Request flow:
+        Client
+            ↓
+        DispatcherServlet
+            ↓
+        Controller
+    
+    Anyone can access:
+        GET /users
+        GET /posts
+        POST /signup
+    unless you manually restrict them.
+
+After adding the dependency
+    Spring inserts a security filter chain before your controllers:
+        Client
+            ↓
+        Spring Security Filters
+            ↓
+        DispatcherServlet
+            ↓
+        Controller
+    Now every request is intercepted first.
+
+Default Security Configuration
+    If you don't provide any custom security configuration, Spring Security applies a default one.
+    The default rule is essentially:
+        Any request
+            ↓
+        Must be authenticated
+    Equivalent to something like:
+        http
+            .authorizeHttpRequests(auth ->
+                auth.anyRequest().authenticated()
+            );

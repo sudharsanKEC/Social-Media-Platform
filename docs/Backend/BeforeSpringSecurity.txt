@@ -1,0 +1,67 @@
+Current Authentication style in Spring Security:
+
+        Frontend
+            ↓
+        Email + Password
+            ↓
+        Backend verifies
+            ↓
+        Redux stores isAuthenticated=true
+
+
+After implementing Spring security and JWT:
+
+        Frontend
+            ↓
+        Email + Password
+            ↓
+        Spring Security authenticates
+            ↓
+        JWT generated
+            ↓
+        Frontend stores JWT
+            ↓
+        JWT attached to requests
+            ↓
+        Spring Security validates JWT
+
+
+For adding spring security in our project:
+        Step 1:
+                Add the below dependency in POM.xml:
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-security</artifactId>
+                    </dependency>
+
+                What is groupId? Think of it as the organization/company name that created the library.
+                Example:
+                    <groupId>org.springframework.boot</groupId>
+                means:
+                    Organization:
+                    org.springframework.boot
+                which belongs to the Spring Boot project.
+
+                What is artifactId? Think of it as the library name within that organization.
+                Example:
+                    <artifactId>spring-boot-starter-security</artifactId>
+                means:
+                    Library Name:
+                        spring-boot-starter-security
+                
+                Together:
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                uniquely identifies:
+                    Spring Boot Security Starter
+                    Just like:
+                            Company + Product Name
+                    identifies a product.
+            
+                We also have not mentioned the dependency version, because spring boot automatically decides it from the parent(Spring boot starter)
+
+
+ChatGPT reference Link: https://chatgpt.com/share/6a26f50e-49d0-8322-94cc-b4519c8b69c1
+
+    
+Refer AfterSpringSecurity.txt for step 2.

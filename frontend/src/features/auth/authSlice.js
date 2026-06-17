@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
     verifiedEmail: localStorage.getItem("verifiedEmail") || "",
     activeUsername: localStorage.getItem("activeUsername") || "",
     // isAuthenticated: false
-    isAuthenticated: localStorage.getItem("isAuthenticated") === "true"
+    isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
+    token: localStorage.getItem("token") || ""
 };
 
 const authSlice = createSlice({
@@ -33,15 +35,22 @@ const authSlice = createSlice({
                 console.log("action: ",action);
             },
 
+            setToken: (state, action)=>{
+                state.token = action.payload;
+                localStorage.setItem("token", action.payload);
+            },
+
             logout: (state) => {
                 
                 state.verifiedEmail = "";
                 state.activeUsername = "";
                 state.isAuthenticated = false;
+                state.token = "";
                 
                 localStorage.removeItem("verifiedEmail");
                 localStorage.removeItem("activeUsername");
                 localStorage.removeItem("isAuthenticated");
+                localStorage.removeItem("token");
             }
     }
 });
@@ -52,6 +61,7 @@ export const {
     setVerifiedEmail,
     setActiveUsername,
     setIsAuthenticated,
+    setToken,
     logout
 } = authSlice.actions;
 

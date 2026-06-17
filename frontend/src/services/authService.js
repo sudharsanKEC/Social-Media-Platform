@@ -1,21 +1,16 @@
-const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
+import { apiFetch } from "./api";
 
 export const sendOtp = async (email) => {
     // Note: fetch() returns a promise, but await of returns the resolved value inside the promise to the variable response below.
     // If the promise was placed in rejected state then the await will throw an error, we should handle them using try-catch
     try{
-        const response = await fetch(
-            `${BASE_URL}/send-otp`,
+        const response = await apiFetch(
+            `/send-otp`,
             {
                 method: "POST",
-                // headers are used to provide extra information about the request.
-                headers: {
-                    "Content-Type": "application/json", // this tells the backend: I am sending JSON data, Content-Type tells the backend server what type of data I am holding. Here it says that the body contains JSON data. 
-                    // The data can be json, XML, plain text, File data and backend parses differently.
-                },
                 // The below body contains the actual data sent to the server
                 body: JSON.stringify({email:email}), // JSON.stringify() converts normal JS object into a text, because http can only understand texts.
-                /**
+                /** 
                     This userEmail is a JavaScript object.
                         But HTTP cannot send raw JS objects.
                         HTTP sends text/binary.

@@ -1,11 +1,10 @@
+import { apiFetch } from "./api";
+
 const verifyLoginService = async (email, password)=>{
-    const api = `${import.meta.env.VITE_API_BASE_URL}/login`;
+    const api = `/login`;
     try{
-        const response =  await fetch(api,{
+        const response =  await apiFetch(api,{
             method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
-            },
             body: JSON.stringify({
                 email:email,
                 password: password

@@ -1,19 +1,25 @@
 package com.socialMedia.platform.config;
 
+import com.socialMedia.platform.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration // This annotation is used to say that the below class is going to have a configuration settings in it.
 @EnableWebSecurity // This tells spring to activate the Spring Security's web security features.
 // the below class is used to enforce some security rules that should be applied before the incoming requests reach the application's controller
 public class SecurityConfig {
 
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter){
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
     @Bean
     // Spring will pass the http object for the below parameter.
-    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         /*
             What is SecurityFilterChain?
                 Its in of the most important concept.
@@ -36,13 +42,27 @@ public class SecurityConfig {
                 So we can manually customize those filters in the SecurityFilterChain and thats what this configuration class is for.
         */
         return http
+                .cors(cors->{}) // this line made the spring security to respect CorsConfig file.
                 .csrf(csrf->csrf.disable())
-                .authorizeHttpRequests(auth->auth.requestMatchers(
+
+                .authorizeHttpRequests(auth->auth
+                        .requestMatchers(
                                 "/api/auth/send-otp",
                                 "/api/auth/verify-otp",
                                 "/api/auth/signup",
-                                "/api/auth/login") // --> Accepts any requests like: /signup, /login, /posts, /users etc...
-                                                                               .permitAll()) // --> Allow access to everyone without authorization.
+                                "/api/auth/login",
+                                "/api/auth/get-jwt",
+                                "/api/auth/jwt-info"
+                                ) // --> Accepts any requests like: /signup, /login, /posts, /users etc...
+                                .permitAll() // --> Allow access to everyone without authorization.
+
+                                .anyRequest()
+                                .authenticated()
+                )
+                .addFilterBefore(
+                        jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                )
                 .build(); // this line is like saying save all the configurations done above.
         /*
             HttpSecurity is a builder object.

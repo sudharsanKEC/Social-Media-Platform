@@ -1,11 +1,12 @@
+import { apiFetch } from "./api";
+
 const otpVerificationService = async (otp, email)=>{
 
-    const url = `${import.meta.env.VITE_API_BASE_URL}/verify-otp`;
-    console.log(import.meta.env.VITE_API_BASE_UR);
+    const url = `/verify-otp`;
+    console.log(import.meta.env.VITE_API_BASE_URL);
     try{
-        const response = await fetch(url, {
+        const response = await apiFetch(url, {
             method: "POST",
-            headers:{"content-type":"application/json"},
             body: JSON.stringify({otp:otp, email:email})
         });
 

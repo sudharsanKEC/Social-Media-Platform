@@ -1,20 +1,15 @@
 package com.socialMedia.platform.controller;
 
 
-import com.socialMedia.platform.dto.LoginDto;
-import com.socialMedia.platform.dto.SendOtpReqDto;
-import com.socialMedia.platform.dto.SignupReqDto;
-import com.socialMedia.platform.dto.VerifyOtpReqDto;
+import com.socialMedia.platform.dto.*;
+import com.socialMedia.platform.security.JwtService;
 import com.socialMedia.platform.service.LoginService;
 import com.socialMedia.platform.service.OtpService;
 import com.socialMedia.platform.service.SignupService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -27,10 +22,12 @@ public class AuthController {
     private final OtpService otpService;
     private final SignupService signupService;
     private final LoginService loginService;
-    public AuthController(OtpService otpService, SignupService signupService, LoginService loginService){
+    private final JwtService jwtService;
+    public AuthController(OtpService otpService, SignupService signupService, LoginService loginService, JwtService jwtService){
         this.otpService = otpService;
         this.signupService = signupService;
         this.loginService = loginService;
+        this.jwtService  = jwtService;
     }
 
     @PostMapping("/send-otp")
@@ -61,14 +58,32 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginDto request){
-        String userName = loginService.handleLogin(request.getEmail(), request.getPassword());
+        LoginResponse userDetails = loginService.handleLogin(request.getEmail(), request.getPassword());
         String message = "Login Successfull";
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());
         response.put("message", message);
-        response.put("username", userName);
+        response.put("username", userDetails.getUserName());
+        response.put("token", userDetails.getToken());
         response.put("status code", HttpStatus.OK.value());
         System.out.println(ResponseEntity.ok(response));
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/get-jwt")
+    public String testJwt(){
+        return jwtService.generateToken("kongucoder24.7@gmail.com");
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "You are authenticated, this is your profile";
+    }
+
+    @GetMapping("/jwt-info")
+    public String jwtInfo(){
+        String token = jwtService.generateToken("kongucoder@gmail.com");
+        return jwtService.extractEmail(token);
+    }
+
 }

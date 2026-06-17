@@ -3,7 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { verifyLoginService } from "../../services/verifyLoginService";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setActiveUsername } from "../../features/auth/authSlice";
+import { setActiveUsername, setToken } from "../../features/auth/authSlice";
 import { setIsAuthenticated } from "../../features/auth/authSlice";
 
 export const LoginPage = (/*{setActiveUsername, setCurrentPage}*/)=>{
@@ -42,6 +42,7 @@ export const LoginPage = (/*{setActiveUsername, setCurrentPage}*/)=>{
             const response = await verifyLoginService(email, password);
             // setActiveUsername(response.username);
             dispatch(setActiveUsername(response.username));
+            dispatch(setToken(response.token));
             dispatch(setIsAuthenticated(true));
             navigate("/home");
         }catch(error){

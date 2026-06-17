@@ -1,12 +1,11 @@
+import { apiFetch } from "./api";
+
 const userRegister = async (email, username, password, confirmPassword)=>{
-    const api = `${import.meta.env.VITE_API_BASE_URL}/signup`;
+    const api = `/signup`;
     try{
         
-            const response = await fetch(api,{
+            const response = await apiFetch(api,{
                 method : "POST",
-                headers : {
-                    "Content-Type" : "application/json"
-                },
                 body :  JSON.stringify({
                     email:email,
                     username: username,

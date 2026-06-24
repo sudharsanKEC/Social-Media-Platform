@@ -53,7 +53,7 @@ public class AuthController {
         response.put("timestamp", LocalDateTime.now());
         response.put("message", message);
         response.put("status code", HttpStatus.OK.value());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response); // return type of .ok() method is ResponseEntity<T>, here as we passed the response hashmap to the ok() method, it will be inferred as Map<String,String>. Then the return type will eventually become ResponseEntity<Map<String, String>>
     }
 
     @PostMapping("/login")

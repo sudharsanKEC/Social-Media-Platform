@@ -94,7 +94,7 @@ public class JwtService {
         return Jwts.parser() // create a jwt parser which is used to parse the JWT token
                 .verifyWith(getSigningKey()) // registers the signing key later used for the verification with the sent token.
                 .build()
-                .parseSignedClaims(token) // now the actual verification happens
+                .parseSignedClaims(token) // now the actual verification happens, if the jwt is found to be invalid then the further method invocations below will not be executed
                 .getPayload() // now the payload got from the JW token will be returned
                 .getSubject(); // email was set as the subject during building the payload, now it was extracted from the payload.
     }

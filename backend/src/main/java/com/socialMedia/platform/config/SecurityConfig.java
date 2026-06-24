@@ -54,7 +54,7 @@ public class SecurityConfig {
                                 "/api/auth/get-jwt",
                                 "/api/auth/jwt-info"
                                 ) // --> Accepts any requests like: /signup, /login, /posts, /users etc...
-                                .permitAll() // --> Allow access to everyone without authorization.
+                                .permitAll() // --> Allow access to everyone without authentication.
 
                                 .anyRequest()
                                 .authenticated()

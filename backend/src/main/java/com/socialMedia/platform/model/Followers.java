@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 public class Followers {
     @Id
     private Long followId;
-    private Long followerUserId;
-    private Long followingUserId;
+    private String followerUserId;
+    private String followingUserId;
     private String followRequestStatus;
     private Boolean isFollower;
     private LocalDateTime followRequestTimestamp;

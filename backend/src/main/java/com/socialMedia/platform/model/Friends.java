@@ -8,8 +8,8 @@ public class Friends {
 
     @Id
     private Long friendsId;
-    private Long requestUserId;
-    private Long receiverUserId;
+    private String requestUserId;
+    private String receiverUserId;
     private String requestStatus;
     private Boolean isFriends;
     private Long endedByUserId;

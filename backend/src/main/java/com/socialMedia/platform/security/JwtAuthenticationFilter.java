@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email = jwtService.extractEmail(token); //
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
             // The above line registers the current user. It was simply like: Think of it like: CurrentUser user = new CurrentUser("john@gmail.com"); But Spring uses: UsernamePasswordAuthenticationToken instead.
-            // The constructor syntax of UsernamePasswordAuthenticationToken is new UsernamePasswordAuthenticationToken(principal, credentials, authorities), the parameters respectively answers the question: Who?, Proof?, Permissions?
+            // The constructor syntax of UsernamePasswordAuthenticationToken is new UsernamePasswordAuthenticationToken(Object principal,Object credentials,Collections<?> authorities), the parameters respectively answers the question: Who?, Proof?, Permissions?
             // In our code: principal = someone@gmail.com, password = null (none), Roles = empty list(none)
             // Principal will be the current authenticated user's identification credential(username/email).
             // Why password is null? Ans: Password already served its purpose, User authenticated earlier. No need to store password. Hence null.
@@ -513,6 +513,113 @@ Answer:
           The passport check is JWT validation.
           The visitor badge is:
                 UsernamePasswordAuthenticationToken
+*/
+
+/*
+Question: But the principal should contain only the field which identifies the user uniquely right? So it can be a username or email but how does a User object? Then again, when we get User details how we get a field exactly which represents the user uniquely like email or username? So my doubt is shall we give the entire particular User's object to pass it as a principal?
+Answer: 1. Should the principal contain only the unique identifier?
+            No. That's a common misconception.
+            The principal is not defined as "the unique identifier".
+            It is defined as:
+                    The identity of the authenticated user.
+                    How you represent that identity is up to you.
+                    Spring intentionally makes it generic.
+            Option 1: Store only the email (your current approach)
+                    new UsernamePasswordAuthenticationToken(
+                        "john@gmail.com",
+                        null,
+                        authorities
+                    );
+                Then:
+                    authentication.getPrincipal()
+                returns:
+                    "john@gmail.com"
+            Advantages:
+                Very small object.
+                Easy to store.
+                Simple.
+            Disadvantage:
+                Every time you need more information:
+                    String email = (String) authentication.getPrincipal();
+                    User user = userRepository.findByUserEmail(email);
+                you must query the database.
+
+            Option 2: Store the whole User object
+                Suppose your User class is:
+                    public class User {
+                        private String id;
+                        private String userEmail;
+                        private String name;
+                    }
+                You can do:
+                    User user = userRepository.findByUserEmail(email).get();
+                    UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(
+                            user,
+                            null,
+                            Collections.emptyList()
+                        );
+                Now:
+                    User currentUser =
+                        (User) authentication.getPrincipal();
+                    No database query needed.
+                Is this allowed?
+                    Absolutely.
+                Remember the constructor:
+                    UsernamePasswordAuthenticationToken(
+                        Object principal,
+                        Object credentials,
+                        Collection<?> authorities
+                    )
+                Notice:
+                    Object principal
+                not
+                    String principal
+                Spring is literally telling you:
+                    "Store whatever object best represents your authenticated user."
+                    Then how do we know the user's email?
+                    Easy.
+                    If the principal is a User object:
+                        User user = (User) authentication.getPrincipal();
+                    Then:
+                        user.getUserEmail();
+                        or
+                        user.getId();
+                        or
+                        user.getName();
+                    Everything is already available.
+                Why do many projects use UserDetails instead?
+                        Spring Security defines the UserDetails interface.
+                It represents:
+                        Authenticated User
+                A typical custom implementation looks like:
+                        public class CustomUserDetails implements UserDetails {
+                            private User user;
+                            ...
+                        }
+                Then:
+                        authentication.getPrincipal()
+                returns:
+                        CustomUserDetails
+                From that:
+                        customUserDetails.getUser().getId();
+                        customUserDetails.getUser().getUserEmail();
+                        customUserDetails.getUser().getName();
+                No extra database lookup.
+                Which approach is better?
+                        There isn't one universally correct answer.
+                        Small applications
+                Store:
+                        String email
+                  Simple.
+
+            Large applications
+                Store:
+                    UserDetails
+                    or
+                    CustomUserDetails
+                More efficient.
+
 
 
 */

@@ -1,4 +1,4 @@
-package com.socialMedia.platform.auth.exception;
+package com.socialMedia.platform.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -137,6 +137,16 @@ public class GlobalExceptionHandler {
         response.put("status",HttpStatus.NOT_FOUND.value());
         response.put("message",exception.getMessage());
         return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handleResourceNotFoundException(ResourceNotFoundException exception){
+        Map<String,String> exceptionResponse = new LinkedHashMap<>();
+        exceptionResponse.put("timestamp", LocalDateTime.now().toString());
+        exceptionResponse.put("status", String.valueOf(HttpStatus.NOT_FOUND.value()));
+        exceptionResponse.put("message",exception.getMessage());
+        exceptionResponse.put("error", HttpStatus.NOT_FOUND.getReasonPhrase());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 }
 

@@ -1,7 +1,7 @@
 package com.socialMedia.platform.auth.service;
 
-import com.socialMedia.platform.auth.exception.*;
 import com.socialMedia.platform.auth.model.OtpVerification;
+import com.socialMedia.platform.exception.*;
 import com.socialMedia.platform.model.User;
 import com.socialMedia.platform.auth.repository.OtpVerificationRepository;
 import com.socialMedia.platform.repository.UserRepository;

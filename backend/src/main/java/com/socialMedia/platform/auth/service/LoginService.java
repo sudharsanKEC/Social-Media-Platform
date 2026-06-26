@@ -1,8 +1,8 @@
 package com.socialMedia.platform.auth.service;
 
 import com.socialMedia.platform.auth.dto.LoginResponse;
-import com.socialMedia.platform.auth.exception.InvalidPasswordException;
-import com.socialMedia.platform.auth.exception.UserNotFoundException;
+import com.socialMedia.platform.exception.InvalidPasswordException;
+import com.socialMedia.platform.exception.UserNotFoundException;
 import com.socialMedia.platform.model.User;
 import com.socialMedia.platform.repository.UserRepository;
 import com.socialMedia.platform.security.JwtService;

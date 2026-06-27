@@ -1,4 +1,5 @@
 package com.socialMedia.platform.post.service;
 
-public class CommentService {
+public interface CommentService {
+
 }

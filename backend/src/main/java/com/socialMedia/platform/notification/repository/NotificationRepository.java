@@ -1,4 +1,8 @@
 package com.socialMedia.platform.notification.repository;
 
-public class NotificationRepository {
+import com.socialMedia.platform.notification.model.Notification;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface NotificationRepository extends MongoRepository<Notification,String> {
+
 }

@@ -1,4 +1,9 @@
 package com.socialMedia.platform.post.service;
 
-public class LikeService {
+public interface LikeService {
+
+    void likePost(String postId);
+
+    void unlikePost(String postId);
+
 }

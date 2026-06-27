@@ -1,4 +1,7 @@
 package com.socialMedia.platform.notification.model;
 
-public class NotificationType {
+public enum NotificationType {
+    COMMENT,
+    FRIEND_REQUEST,
+    MESSAGE
 }

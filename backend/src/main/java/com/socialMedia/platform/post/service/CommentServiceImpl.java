@@ -1,4 +1,4 @@
 package com.socialMedia.platform.post.service;
 
-public class CommentServiceImpl {
+public class CommentServiceImpl implements CommentService{
 }

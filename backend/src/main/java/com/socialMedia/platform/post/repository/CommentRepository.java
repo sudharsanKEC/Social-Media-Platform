@@ -1,4 +1,10 @@
 package com.socialMedia.platform.post.repository;
 
-public interface CommentRepository {
+import com.socialMedia.platform.post.model.Comment;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+public interface CommentRepository extends MongoRepository<Comment, String> {
+    List<Comment> findAllByPostIdAndIsDeletedFalseOrderByCreatedAtAsc(String postId);
 }

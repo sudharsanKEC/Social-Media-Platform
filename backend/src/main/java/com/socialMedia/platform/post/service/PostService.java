@@ -1,9 +1,8 @@
 package com.socialMedia.platform.post.service;
 
-import com.socialMedia.platform.post.dto.CreatePostRequest;
-import com.socialMedia.platform.post.dto.PostResponse;
-import com.socialMedia.platform.post.dto.UpdatePostRequest;
-import org.springframework.data.mongodb.core.query.Update;
+import com.socialMedia.platform.post.dto.post.CreatePostRequest;
+import com.socialMedia.platform.post.dto.post.PostResponse;
+import com.socialMedia.platform.post.dto.post.UpdatePostRequest;
 
 import java.util.List;
 

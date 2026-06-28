@@ -1,7 +1,7 @@
-package com.socialMedia.platform.post.dto;
+package com.socialMedia.platform.post.dto.post;
 
-import com.socialMedia.platform.post.model.PostType;
-import com.socialMedia.platform.post.model.PostVisibility;
+import com.socialMedia.platform.post.model.post.PostType;
+import com.socialMedia.platform.post.model.post.PostVisibility;
 import lombok.*;
 
 import java.time.LocalDateTime;

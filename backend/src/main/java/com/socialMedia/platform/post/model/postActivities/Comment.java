@@ -1,11 +1,17 @@
-package com.socialMedia.platform.post.model;
+package com.socialMedia.platform.post.model.postActivities;
 
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Document(collection = "Comments")
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
 
     @Id

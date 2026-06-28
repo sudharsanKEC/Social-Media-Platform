@@ -1,10 +1,10 @@
 package com.socialMedia.platform.post.service.mapper;
 
-import com.socialMedia.platform.post.dto.PostMediaRequest;
-import com.socialMedia.platform.post.dto.PostMediaResponse;
-import com.socialMedia.platform.post.dto.PostResponse;
-import com.socialMedia.platform.post.model.Post;
-import com.socialMedia.platform.post.model.PostMedia;
+import com.socialMedia.platform.post.dto.post.PostMediaRequest;
+import com.socialMedia.platform.post.dto.post.PostMediaResponse;
+import com.socialMedia.platform.post.dto.post.PostResponse;
+import com.socialMedia.platform.post.model.post.Post;
+import com.socialMedia.platform.post.model.post.PostMedia;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

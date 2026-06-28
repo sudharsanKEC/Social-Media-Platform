@@ -1,6 +1,6 @@
 package com.socialMedia.platform.post.repository;
 
-import com.socialMedia.platform.post.model.Like;
+import com.socialMedia.platform.post.model.postActivities.Like;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

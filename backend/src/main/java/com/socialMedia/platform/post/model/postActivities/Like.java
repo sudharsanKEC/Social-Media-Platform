@@ -1,4 +1,4 @@
-package com.socialMedia.platform.post.model;
+package com.socialMedia.platform.post.model.postActivities;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

@@ -2,22 +2,20 @@ package com.socialMedia.platform.post.service;
 
 import com.socialMedia.platform.exception.ResourceNotFoundException;
 import com.socialMedia.platform.model.User;
-import com.socialMedia.platform.post.dto.*;
-import com.socialMedia.platform.post.model.MediaType;
-import com.socialMedia.platform.post.model.Post;
-import com.socialMedia.platform.post.model.PostMedia;
-import com.socialMedia.platform.post.model.PostVisibility;
+import com.socialMedia.platform.post.dto.post.CreatePostRequest;
+import com.socialMedia.platform.post.dto.post.PostResponse;
+import com.socialMedia.platform.post.dto.post.UpdatePostRequest;
+import com.socialMedia.platform.post.model.post.Post;
+import com.socialMedia.platform.post.model.post.PostVisibility;
 import com.socialMedia.platform.post.repository.PostRepository;
 import com.socialMedia.platform.post.service.mapper.PostMapper;
 import com.socialMedia.platform.post.service.util.AuthenticatedUserProvider;
 import com.socialMedia.platform.post.service.validator.PostValidator;
 import com.socialMedia.platform.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 

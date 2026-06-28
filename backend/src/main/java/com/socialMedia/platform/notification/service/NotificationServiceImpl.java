@@ -2,7 +2,7 @@ package com.socialMedia.platform.notification.service;
 
 import com.socialMedia.platform.model.User;
 import com.socialMedia.platform.notification.repository.NotificationRepository;
-import com.socialMedia.platform.post.model.Post;
+import com.socialMedia.platform.post.model.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

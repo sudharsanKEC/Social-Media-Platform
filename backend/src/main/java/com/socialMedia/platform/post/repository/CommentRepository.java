@@ -1,6 +1,6 @@
 package com.socialMedia.platform.post.repository;
 
-import com.socialMedia.platform.post.model.Comment;
+import com.socialMedia.platform.post.model.postActivities.Comment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

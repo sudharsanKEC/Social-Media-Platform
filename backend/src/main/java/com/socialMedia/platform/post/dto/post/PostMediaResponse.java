@@ -1,6 +1,6 @@
-package com.socialMedia.platform.post.dto;
+package com.socialMedia.platform.post.dto.post;
 
-import com.socialMedia.platform.post.model.MediaType;
+import com.socialMedia.platform.post.model.post.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class PostMediaRequest {
+@AllArgsConstructor
+public class PostMediaResponse {
     private MediaType mediaType;
     private String mediaUrl;
     private String thumbnailUrl;

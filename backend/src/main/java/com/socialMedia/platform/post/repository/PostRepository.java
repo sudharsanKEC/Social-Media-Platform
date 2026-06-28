@@ -1,7 +1,7 @@
 package com.socialMedia.platform.post.repository;
 
-import com.socialMedia.platform.post.model.Post;
-import com.socialMedia.platform.post.model.PostVisibility;
+import com.socialMedia.platform.post.model.post.Post;
+import com.socialMedia.platform.post.model.post.PostVisibility;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

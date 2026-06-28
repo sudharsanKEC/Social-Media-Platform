@@ -2,12 +2,11 @@ package com.socialMedia.platform.post.service;
 
 import com.socialMedia.platform.exception.ResourceNotFoundException;
 import com.socialMedia.platform.model.User;
-import com.socialMedia.platform.post.model.Like;
-import com.socialMedia.platform.post.model.Post;
+import com.socialMedia.platform.post.model.postActivities.Like;
+import com.socialMedia.platform.post.model.post.Post;
 import com.socialMedia.platform.post.repository.LikeRepository;
 import com.socialMedia.platform.post.repository.PostRepository;
 import com.socialMedia.platform.post.service.util.AuthenticatedUserProvider;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

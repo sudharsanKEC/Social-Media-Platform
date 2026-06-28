@@ -1,8 +1,8 @@
 package com.socialMedia.platform.post.service.validator;
 
-import com.socialMedia.platform.post.dto.CreatePostRequest;
-import com.socialMedia.platform.post.dto.PostMediaRequest;
-import com.socialMedia.platform.post.model.MediaType;
+import com.socialMedia.platform.post.dto.post.CreatePostRequest;
+import com.socialMedia.platform.post.dto.post.PostMediaRequest;
+import com.socialMedia.platform.post.model.post.MediaType;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

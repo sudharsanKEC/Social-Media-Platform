@@ -1,6 +1,6 @@
-package com.socialMedia.platform.post.dto;
+package com.socialMedia.platform.post.dto.post;
 
-import com.socialMedia.platform.post.model.PostVisibility;
+import com.socialMedia.platform.post.model.post.PostVisibility;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

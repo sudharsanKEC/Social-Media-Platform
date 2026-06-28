@@ -1,4 +1,4 @@
-package com.socialMedia.platform.post.model;
+package com.socialMedia.platform.post.model.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

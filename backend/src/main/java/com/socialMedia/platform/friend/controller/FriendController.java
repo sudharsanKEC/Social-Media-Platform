@@ -2,10 +2,14 @@ package com.socialMedia.platform.friend.controller;
 
 import com.socialMedia.platform.friend.dto.FriendRequest;
 import com.socialMedia.platform.friend.dto.FriendRequestResponse;
+import com.socialMedia.platform.friend.dto.PendingFriendRequestResponse;
 import com.socialMedia.platform.friend.service.FriendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/friends")
@@ -31,4 +35,20 @@ public class FriendController {
         return ResponseEntity.ok("Friend request accepted.");
     }
 
+    @PostMapping("/{friendRequestId}/reject")
+    public ResponseEntity<String> rejectFriendRequest(@PathVariable String friendRequestId){
+        friendService.rejectFriendRequest(friendRequestId);
+        return ResponseEntity.ok("Friend request rejected. ");
+    }
+
+    @PostMapping("/{friendRequestId}/cancel")
+    public ResponseEntity<String> cancelFriendRequest(@PathVariable String friendRequestId){
+        friendService.cancelFriendRequest(friendRequestId);
+        return ResponseEntity.ok("Friend request cancelled. ");
+    }
+
+    @GetMapping("/requests")
+    public ResponseEntity<List<PendingFriendRequestResponse>> getPendingFriendRequests(){
+        return ResponseEntity.ok(friendService.getPendingFriendRequests());
+    }
 }

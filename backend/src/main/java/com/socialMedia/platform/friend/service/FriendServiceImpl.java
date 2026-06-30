@@ -2,6 +2,7 @@ package com.socialMedia.platform.friend.service;
 
 import com.socialMedia.platform.exception.ResourceNotFoundException;
 import com.socialMedia.platform.friend.dto.FriendRequestResponse;
+import com.socialMedia.platform.friend.dto.PendingFriendRequestResponse;
 import com.socialMedia.platform.friend.model.Friend;
 import com.socialMedia.platform.friend.model.FriendRequestStatus;
 import com.socialMedia.platform.friend.repository.FriendRepository;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +37,7 @@ public class FriendServiceImpl implements FriendService{
             throw new IllegalArgumentException("You cannot send a friend request to yourself.");
         }
 
+        // Already friends? (sender -> receiver)
         Optional<Friend> existingFriend =
                 friendRepository.findByRequestUserIdAndReceiverUserIdAndStatus(
                         sender.getUserId(),
@@ -41,10 +45,35 @@ public class FriendServiceImpl implements FriendService{
                         FriendRequestStatus.ACCEPTED
                 );
 
+        if(existingFriend.isEmpty()){
+            existingFriend = friendRepository
+                    .findByRequestUserIdAndReceiverUserIdAndStatus(
+                            receiver.getUserId(),
+                            sender.getUserId(),
+                            FriendRequestStatus.ACCEPTED
+                    );
+        }
+
         if(existingFriend.isPresent()){
             throw new IllegalArgumentException("You are already friends.");
         }
+        /*
+            Why the above condition?
+                    When User A sends a request User B.
+                    And lets consider that was accepted.
+                    Now the requestedUserId will be the User A and the receiverUserId will be the User B.
+                    Now we are checking whether that combination of document exists in the db first with the friendship status accepted, in this line: Optional<Friend> existingFriend =friendRepository.findByRequestUserIdAndReceiverUserIdAndStatus(...);
+                    If not, then we are checking whether User B requested the User A and from that combination the status = accepted is existing or not, in this line: if(existingFriend.isEmpty()) and inside it the mongoDB querying: existingFriend = friendRepository.findByRequestUserIdAndReceiverUserIdAndStatus(...);
+                    If any of the condition was true, then the exception You are already friends will be thrown.
+            Note: In the mongoDB querying lines:
+                        i)  findByRequestUserIdAndReceiverUserIdAndStatus(sender.getUserId(), receiver.getUserId(), FriendRequestStatus.ACCEPTED);
+                        ii) findByRequestUserIdAndReceiverUserIdAndStatus(receiver.getUserId(), sender.getUserId(), FriendRequestStatus.ACCEPTED);
+                    Notice how the parameter passing changes according to the sender and receiver.
 
+        */
+
+        // checking whether current request's receiver have already sent a request to the current send.
+        // If that exists then the request will be considered accepted automatically.
         Friend reverseRequest = friendRepository
                 .findByRequestUserIdAndReceiverUserIdAndStatus(
                         receiverUserId,
@@ -53,6 +82,7 @@ public class FriendServiceImpl implements FriendService{
                 )
                 .orElse(null);
 
+        // If that kind requests exists already, then the logic for making each others friends is written below.
         if (reverseRequest != null) {
 
             reverseRequest.setStatus(FriendRequestStatus.ACCEPTED);
@@ -73,19 +103,6 @@ public class FriendServiceImpl implements FriendService{
                     .build();
         }
 
-
-        Friend reverseRequestDuplicate = friendRepository
-                .findByRequestUserIdAndReceiverUserIdAndStatus(
-                        receiverUserId,
-                        sender.getUserId(),
-                        FriendRequestStatus.ACCEPTED
-                )
-                .orElse(null);
-
-        if(reverseRequestDuplicate != null){
-            throw new IllegalArgumentException("Already friends.");
-        }
-
         if(friendRepository.existsByRequestUserIdAndReceiverUserId(
                 sender.getUserId(),
                 receiver.getUserId() )){
@@ -99,11 +116,11 @@ public class FriendServiceImpl implements FriendService{
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        friendRepository.save(friend);
+        Friend savedFriend = friendRepository.save(friend);
         return FriendRequestResponse.builder()
-                .requestId(friend.getFriendId())
-                .requestSentTime(friend.getCreatedAt())
-                .status(friend.getStatus())
+                .requestId(savedFriend.getFriendId())
+                .requestSentTime(savedFriend.getCreatedAt())
+                .status(savedFriend.getStatus())
                 .build();
     }
 
@@ -138,6 +155,49 @@ public class FriendServiceImpl implements FriendService{
 
         userRepository.save(sender);
         userRepository.save(receiver);
-
     }
+
+    @Override
+    public void rejectFriendRequest(String friendRequestId){
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        Friend friendRequest = friendRepository.findById(friendRequestId)
+                .orElseThrow(()->new ResourceNotFoundException("Friend request not found."));
+
+        // Only receiver can reject
+        if(!friendRequest.getReceiverUserId().equals(currentUser.getUserId())){
+            throw new IllegalArgumentException("Only the receiver can reject this friend request. ");
+        }
+
+        if(friendRequest.getStatus() != FriendRequestStatus.PENDING){
+            throw new IllegalArgumentException("Friend request has already been processed. ");
+        }
+
+        friendRequest.setStatus(FriendRequestStatus.REJECTED);
+        friendRequest.setRespondedAt(LocalDateTime.now());
+
+        friendRepository.save(friendRequest);
+    }
+
+    @Override
+    public void cancelFriendRequest(String friendRequestId){
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        Friend friendRequest = friendRepository.findById(friendRequestId)
+                .orElseThrow(()-> new ResourceNotFoundException("Friend request not found. "));
+
+        if(!friendRequest.getRequestUserId().equals(currentUser.getUserId())){
+            throw new IllegalArgumentException("Only the sender can cancel this friend request. ");
+        }
+
+        if(friendRequest.getStatus() != FriendRequestStatus.PENDING){
+            throw new IllegalArgumentException("Only pending friend requests can be cancelled. ");
+        }
+
+        friendRequest.setStatus(FriendRequestStatus.CANCELLED);
+        friendRequest.setRespondedAt(LocalDateTime.now());
+
+        friendRepository.save(friendRequest);
+    }
+
 }

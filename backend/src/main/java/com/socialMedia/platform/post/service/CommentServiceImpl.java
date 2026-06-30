@@ -84,8 +84,6 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("Deleted comments cannot be edited.");
         }
 
-
-
         if(trimToNull(commentRequest.getContent()) == null){
             throw new IllegalArgumentException("Content cannot be empty.");
         }

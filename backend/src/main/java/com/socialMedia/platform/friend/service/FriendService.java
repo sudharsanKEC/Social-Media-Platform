@@ -14,4 +14,5 @@ public interface FriendService {
     void acceptFriendRequest(String friendRequestId);
     void rejectFriendRequest(String friendRequestId);
     void cancelFriendRequest(String friendRequestId);
+    void unfriend(String friendRequestId);
 }

@@ -3,6 +3,7 @@ package com.socialMedia.platform.friend.controller;
 import com.socialMedia.platform.friend.dto.FriendRequest;
 import com.socialMedia.platform.friend.dto.FriendRequestResponse;
 import com.socialMedia.platform.friend.dto.PendingFriendRequestResponse;
+import com.socialMedia.platform.friend.service.FriendQueryService;
 import com.socialMedia.platform.friend.service.FriendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FriendController {
 
     private final FriendService friendService;
+    private final FriendQueryService friendQueryService;
 
     @PostMapping
     public ResponseEntity<FriendRequestResponse> friendRequest(@RequestBody FriendRequest request){
@@ -49,6 +51,13 @@ public class FriendController {
 
     @GetMapping("/requests")
     public ResponseEntity<List<PendingFriendRequestResponse>> getPendingFriendRequests(){
-        return ResponseEntity.ok(friendService.getPendingFriendRequests());
+        return ResponseEntity.ok(friendQueryService.getPendingFriendRequests());
     }
+
+    @GetMapping("/friendRequests")
+    public ResponseEntity<List<PendingFriendRequestResponse>> getSentFriendRequests(){
+        return ResponseEntity.ok(friendQueryService.getSentFriendRequests());
+    }
+
+
 }

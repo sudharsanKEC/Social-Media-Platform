@@ -16,4 +16,6 @@ public interface LikeRepository extends MongoRepository<Like, String> {
 
     boolean existsByPostIdAndUserId(String postId, String userId); // returns true if the given postId was liked by the given userId.
 
+    List<Like> findAllByUserIdOrderByLikedAtDesc(String userId);
+
 }

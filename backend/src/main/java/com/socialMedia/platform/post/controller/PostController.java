@@ -48,6 +48,11 @@ public class PostController {
         );
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<List<PostResponse>> getMyPosts(){
+        return ResponseEntity.ok(postService.getMyPosts());
+    }
+
     @PutMapping("/{postId}")
     public ResponseEntity<PostResponse> updatePost(@PathVariable String postId, @RequestBody UpdatePostRequest request){
         return ResponseEntity.ok(postService.updatePost(postId, request));
@@ -57,39 +62,6 @@ public class PostController {
     public ResponseEntity<String> deletePost(@PathVariable String postId){
         postService.deletePost(postId);
         return ResponseEntity.ok("Post deleted successfully.");
-    }
-
-    @PostMapping("/{postId}/like")
-    public ResponseEntity<String> likePost(@PathVariable String postId){
-        likeService.likePost(postId);
-        return ResponseEntity.ok("Post liked successfully.");
-    }
-
-    @DeleteMapping("/{postId}/like")
-    public ResponseEntity<String> unlikePost(@PathVariable String postId){
-        likeService.unlikePost(postId);
-        return ResponseEntity.ok("Post unliked successfully.");
-    }
-
-    @PostMapping("/{postId}/comments")
-    public ResponseEntity<CommentResponse> addComment(@PathVariable String postId, @RequestBody CreateCommentRequest request){
-        return ResponseEntity.ok(commentService.addComment(postId, request));
-    }
-
-    @GetMapping("/{postId}/comments")
-    public ResponseEntity<List<CommentResponse>> getComments(@PathVariable String postId){
-        return ResponseEntity.ok(commentService.getComments(postId));
-    }
-
-    @PutMapping("/comments/{commentId}")
-    public ResponseEntity<CommentResponse> updateComment(@PathVariable String commentId, @RequestBody UpdateCommentRequest request){
-        return ResponseEntity.ok(commentService.updateComment(commentId,request));
-    }
-
-    @DeleteMapping("/comments/{commentId}")
-    public ResponseEntity<String> deleteComment(@PathVariable String commentId){
-        commentService.deleteComment(commentId);
-        return ResponseEntity.ok("Comment deleted successfully.");
     }
 
 }

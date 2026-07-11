@@ -152,4 +152,17 @@ public class PostServiceImpl implements PostService{
         postRepository.save(post);
         userRepository.save(currentUser);
     }
+
+    @Override
+    public List<PostResponse> getMyPosts(){
+
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        List<Post> posts = postRepository.findAllByAuthorUserIdAndIsDeletedFalseOrderByCreatedAtDesc(currentUser.getUserId());
+
+        return posts.stream()
+                .map(postMapper::mapToPostResponse)
+        .toList();
+
+    }
 }

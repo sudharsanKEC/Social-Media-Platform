@@ -32,6 +32,7 @@ public class User {
     private String userProfilePhotoUrl;
     private String userDescription;
     private String userSummary;
+    private FollowPrivacy followPrivacy;
 
     private LocalDateTime userCreatedAt;
 

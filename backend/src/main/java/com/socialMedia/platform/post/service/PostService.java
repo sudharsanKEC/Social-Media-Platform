@@ -10,6 +10,7 @@ public interface PostService {
     PostResponse createPost(CreatePostRequest request);
     PostResponse getPostById(String postId);
     List<PostResponse> getAllPosts();
+    List<PostResponse> getMyPosts();
     PostResponse updatePost(String postId, UpdatePostRequest request);
     void deletePost(String postId);
 }

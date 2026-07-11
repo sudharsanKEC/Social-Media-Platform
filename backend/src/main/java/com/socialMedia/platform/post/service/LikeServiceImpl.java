@@ -2,15 +2,19 @@ package com.socialMedia.platform.post.service;
 
 import com.socialMedia.platform.exception.ResourceNotFoundException;
 import com.socialMedia.platform.model.User;
+import com.socialMedia.platform.post.dto.post.PostResponse;
 import com.socialMedia.platform.post.model.postActivities.Like;
 import com.socialMedia.platform.post.model.post.Post;
 import com.socialMedia.platform.post.repository.LikeRepository;
 import com.socialMedia.platform.post.repository.PostRepository;
+import com.socialMedia.platform.post.service.mapper.PostMapper;
 import com.socialMedia.platform.post.service.util.AuthenticatedUserProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +23,7 @@ public class LikeServiceImpl implements LikeService{
     private final LikeRepository likeRepository;
     private final PostRepository postRepository;
     private final AuthenticatedUserProvider authenticatedUserProvider;
+    private final PostMapper postMapper;
 
     @Override
     public void likePost(String postId){
@@ -75,5 +80,28 @@ public class LikeServiceImpl implements LikeService{
         */
 
         postRepository.save(post);
+    }
+
+    @Override
+    public List<PostResponse> getLikedPosts(){
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        List<Like> likes = likeRepository.findAllByUserIdOrderByLikedAtDesc(
+                currentUser.getUserId()
+        );
+
+        List<String>  postIds = likes.stream()
+                .map(Like::getPostId)
+                .toList();
+
+        if(postIds.isEmpty()){
+            return Collections.emptyList();
+        }
+
+        List<Post> likedPosts = postRepository.findAllByPostIdInAndIsDeletedFalse(postIds);
+
+        return likedPosts.stream()
+                .map(postMapper::mapToPostResponse)
+                .toList();
     }
 }

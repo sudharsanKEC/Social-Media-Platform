@@ -20,4 +20,13 @@ public interface FriendRepository extends MongoRepository<Friend, String> {
     List<Friend> findAllByReceiverUserIdAndStatusOrderByCreatedAtDesc(String receiverUserId, FriendRequestStatus status);
     List<Friend> findAllByRequestUserIdAndStatusOrderByCreatedAtDesc(String requestUserId, FriendRequestStatus status);
     List<Friend> findAllByStatusAndRequestUserIdOrStatusAndReceiverUserId(FriendRequestStatus status1, String currentUserId1, FriendRequestStatus status2, String currentUserId2);
+
+    Optional<Friend> findByStatusAndRequestUserIdAndReceiverUserIdOrStatusAndRequestUserIdAndReceiverUserId(
+            FriendRequestStatus status1,
+            String requestUserId1,
+            String receiverUserId1,
+            FriendRequestStatus status2,
+            String requestUserId2,
+            String receiverUserId2
+    );
 }

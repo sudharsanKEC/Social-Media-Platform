@@ -200,4 +200,41 @@ public class FriendServiceImpl implements FriendService{
         friendRepository.save(friendRequest);
     }
 
+    @Override
+    public void unfriend(String friendUserId) {
+
+        // Step 1 - Get logged-in user
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        // Step 2 - Find the accepted friendship
+        Friend friendship = friendRepository
+                .findByStatusAndRequestUserIdAndReceiverUserIdOrStatusAndRequestUserIdAndReceiverUserId(
+                        FriendRequestStatus.ACCEPTED,
+                        currentUser.getUserId(),
+                        friendUserId,
+                        FriendRequestStatus.ACCEPTED,
+                        friendUserId,
+                        currentUser.getUserId()
+                )
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Friendship not found.")
+                );
+
+        // Step 3 - Load the other user
+        User friendUser = userRepository.findById(friendUserId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found.")
+                );
+
+        // Step 4 - Decrement both friend counts
+        currentUser.setUserFriendsCount(currentUser.getUserFriendsCount() - 1);
+        friendUser.setUserFriendsCount(friendUser.getUserFriendsCount() - 1);
+
+        userRepository.save(currentUser);
+        userRepository.save(friendUser);
+
+        // Step 5 - Remove friendship
+        friendRepository.delete(friendship);
+    }
+
 }

@@ -61,6 +61,7 @@ public class CommentServiceImpl implements CommentService{
         return commentMapper.mapToCommentResponse(savedComment);
     }
 
+    @Override
     public List<CommentResponse> getComments(String postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(()->new ResourceNotFoundException("Post is not available"));
@@ -70,6 +71,18 @@ public class CommentServiceImpl implements CommentService{
         return commentMapper.mapToCommentResponseList(comments);
     }
 
+    @Override
+    public List<CommentResponse> getMyComments(){
+        User currentUser = authenticatedUserProvider.getCurrentAuthenticatedUser();
+
+        List<Comment> comments = commentRepository.findAllByAuthorUserIdAndIsDeletedFalseOrderByCreatedAtDesc(currentUser.getUserId());
+
+        return comments.stream()
+                .map(commentMapper::mapToCommentResponse)
+                .toList();
+    }
+
+    @Override
     public CommentResponse updateComment(String commentId, UpdateCommentRequest commentRequest){
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()->new ResourceNotFoundException("Comment doesnt exist."));
@@ -96,6 +109,7 @@ public class CommentServiceImpl implements CommentService{
         return commentMapper.mapToCommentResponse(comment);
     }
 
+    @Override
     public void deleteComment(String commentId){
         User user = authenticatedUserProvider.getCurrentAuthenticatedUser();
 

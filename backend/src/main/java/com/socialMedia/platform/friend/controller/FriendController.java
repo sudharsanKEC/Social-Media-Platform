@@ -2,6 +2,7 @@ package com.socialMedia.platform.friend.controller;
 
 import com.socialMedia.platform.friend.dto.FriendRequest;
 import com.socialMedia.platform.friend.dto.FriendRequestResponse;
+import com.socialMedia.platform.friend.dto.FriendResponse;
 import com.socialMedia.platform.friend.dto.PendingFriendRequestResponse;
 import com.socialMedia.platform.friend.service.FriendQueryService;
 import com.socialMedia.platform.friend.service.FriendService;
@@ -57,6 +58,21 @@ public class FriendController {
     @GetMapping("/friendRequests")
     public ResponseEntity<List<PendingFriendRequestResponse>> getSentFriendRequests(){
         return ResponseEntity.ok(friendQueryService.getSentFriendRequests());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FriendResponse>> getFriends() {
+        return ResponseEntity.ok(friendQueryService.getFriends());
+    }
+
+    @DeleteMapping("/{friendUserId}")
+    public ResponseEntity<Void> unfriend(
+            @PathVariable String friendUserId) {
+
+        friendService.unfriend(friendUserId);
+
+        return ResponseEntity.noContent().build();
+
     }
 
 

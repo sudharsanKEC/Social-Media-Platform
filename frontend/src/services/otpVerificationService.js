@@ -2,7 +2,7 @@ import { apiFetch } from "./api";
 
 const otpVerificationService = async (otp, email)=>{
 
-    const url = `/verify-otp`;
+    const url = `/auth/verify-otp`;
     console.log(import.meta.env.VITE_API_BASE_URL);
     try{
         const response = await apiFetch(url, {

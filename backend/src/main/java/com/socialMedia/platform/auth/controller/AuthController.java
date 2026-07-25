@@ -70,11 +70,6 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/get-jwt")
-    public String testJwt(){
-        return jwtService.generateToken("kongucoder24.7@gmail.com");
-    }
-
     @GetMapping("/profile")
     public String profile(){
         return "You are authenticated, this is your profile";

@@ -27,7 +27,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getComments(postId));
     }
 
-    @GetMapping("/me")
+    @GetMapping("/my-comments")
     public ResponseEntity<List<CommentResponse>> getMyComments(){
         return ResponseEntity.ok(commentService.getMyComments());
     }

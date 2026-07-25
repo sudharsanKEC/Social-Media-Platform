@@ -1,7 +1,7 @@
 import { apiFetch } from "./api";
 
 const verifyLoginService = async (email, password)=>{
-    const api = `/login`;
+    const api = `/auth/login`;
     try{
         const response =  await apiFetch(api,{
             method: "POST",

@@ -2,7 +2,7 @@ import { apiFetch } from "./api";
 
 export async function getServerMessage() {
     try{
-        const response = await apiFetch("/profile",{
+        const response = await apiFetch("/auth/profile",{
             method:"GET"
         });
 

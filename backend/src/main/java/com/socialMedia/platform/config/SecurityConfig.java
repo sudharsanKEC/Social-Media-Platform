@@ -46,13 +46,19 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable())
 
                 .authorizeHttpRequests(auth->auth
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/posts").permitAll()
                         .requestMatchers(
                                 "/api/auth/send-otp",
                                 "/api/auth/verify-otp",
                                 "/api/auth/signup",
                                 "/api/auth/login",
                                 "/api/auth/get-jwt",
-                                "/api/auth/jwt-info"
+                                "/api/auth/jwt-info",
+
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/uploads/**"
                                 ) // --> Accepts any requests like: /signup, /login, /posts, /users etc...
                                 .permitAll() // --> Allow access to everyone without authentication.
 

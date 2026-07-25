@@ -27,3 +27,37 @@ export async function apiFetch(
     
     return response;
 }
+
+export async function handleResponse(response, defaultError = "Something went wrong") {
+    if (!response.ok) {
+        let errorMsg = defaultError;
+        try {
+            const text = await response.text();
+            try {
+                const data = JSON.parse(text);
+                errorMsg = data.message || errorMsg;
+            } catch (e) {
+                errorMsg = text || errorMsg;
+            }
+        } catch (err) {}
+        throw new Error(errorMsg);
+    }
+    return response.json();
+}
+
+export async function handleTextResponse(response, defaultError = "Something went wrong") {
+    if (!response.ok) {
+        let errorMsg = defaultError;
+        try {
+            const text = await response.text();
+            try {
+                const data = JSON.parse(text);
+                errorMsg = data.message || errorMsg;
+            } catch (e) {
+                errorMsg = text || errorMsg;
+            }
+        } catch (err) {}
+        throw new Error(errorMsg);
+    }
+    return response.text();
+}

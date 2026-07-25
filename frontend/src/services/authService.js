@@ -5,7 +5,7 @@ export const sendOtp = async (email) => {
     // If the promise was placed in rejected state then the await will throw an error, we should handle them using try-catch
     try{
         const response = await apiFetch(
-            `/send-otp`,
+            `/auth/send-otp`,
             {
                 method: "POST",
                 // The below body contains the actual data sent to the server

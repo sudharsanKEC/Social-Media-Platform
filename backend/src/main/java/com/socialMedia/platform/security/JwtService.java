@@ -4,7 +4,6 @@ import io.jsonwebtoken.Jwts; // an utility class provided by the JJWT library, i
 // The above is used to create JWT tokens, parse and validate JWT tokens. It provides the methods like Jwts.builder() - this method creates a JWT builder object.
 // And also provides the method: Jwts.parseBuilder() which is used to read and validate an existing token.
 
-import io.jsonwebtoken.security.JwkThumbprint;
 import io.jsonwebtoken.security.Keys; // keys is a helper class used for creating cryptographic keys. JWT tokens must be digitally signed so that nobody can modify them.
 // This class helps convert your secret string into a proper SecretKey object.
 

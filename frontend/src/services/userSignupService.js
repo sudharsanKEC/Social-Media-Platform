@@ -1,7 +1,7 @@
 import { apiFetch } from "./api";
 
 const userRegister = async (email, username, password, confirmPassword)=>{
-    const api = `/signup`;
+    const api = `/auth/signup`;
     try{
         
             const response = await apiFetch(api,{

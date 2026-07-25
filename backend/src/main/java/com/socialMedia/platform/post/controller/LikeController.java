@@ -28,7 +28,7 @@ public class LikeController {
         return ResponseEntity.ok("Post unliked successfully.");
     }
 
-    @GetMapping
+    @GetMapping("/liked")
     public ResponseEntity<List<PostResponse>> getLikedPosts(){
         return ResponseEntity.ok(likeService.getLikedPosts());
     }

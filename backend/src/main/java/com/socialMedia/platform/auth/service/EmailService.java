@@ -19,7 +19,14 @@ public class EmailService {
         message.setText(
                 "Your OTP for the Social Media Platform Verification is "+otp+"\n\n This OTP will expire in three minutes"
         ); // setting the message along with the OTP
-        mailSender.send(message); // this line is an important line
+        try {
+            mailSender.send(message); // this line is an important line
+        } catch (Exception e) {
+            System.err.println("----------------------------------------------");
+            System.err.println("SMTP email delivery failed! For testing, your OTP is: " + otp);
+            System.err.println("Error details: " + e.getMessage());
+            System.err.println("----------------------------------------------");
+        }
         // Spring uses the SMTP settings from our configuration and then connects to the GMAIL SMTP server, Authenticates using username/password, Sends the email, Disconnects.
         // So all of that happens behind the single line mailSender.send(message)
     }

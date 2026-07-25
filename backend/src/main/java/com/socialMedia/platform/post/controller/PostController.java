@@ -20,13 +20,9 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
-    private final LikeService likeService;
-    private final CommentService commentService;
 
     public PostController(PostService postService, LikeService likeService, CommentService commentService){
         this.postService = postService;
-        this.likeService = likeService;
-        this.commentService = commentService;
     }
 
     @PostMapping
@@ -48,7 +44,7 @@ public class PostController {
         );
     }
 
-    @GetMapping("/me")
+    @GetMapping("/my-posts")
     public ResponseEntity<List<PostResponse>> getMyPosts(){
         return ResponseEntity.ok(postService.getMyPosts());
     }
